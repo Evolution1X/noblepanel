@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Admin Dashboard | Noble Node Control Panel</title>
+  
+  <link rel="icon" type="image/png" href="/static/images/logo.png">
+  
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  
+  <link rel="stylesheet" href="/static/css/style.css?v=5000">
+  <link rel="stylesheet" href="/static/css/noble-admin.css?v=1">
+</head>
+<body class="nn-admin" data-admin-url="{{ admin_url }}">
+
+  
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="{{ admin_url }}" class="brand-logo">
+        <img src="/static/images/logo.png" alt="Noble Node Admin" class="brand-logo-img">
+        <span style="font-size: 0.72rem; font-weight: 800; background: var(--bg-card-alt); border: 1px solid var(--border-bright); padding: 0.2rem 0.5rem; border-radius: 6px; color: var(--text-muted); margin-left: 0.25rem;">ADMIN</span>
+      </a>
+
+      <div class="nav-actions" style="display: flex; gap: 0.75rem; align-items: center;">
+        <div class="toggle-switch" id="theme-toggle-switch">
+          <label class="switch-label">
+            <input type="checkbox" class="checkbox" id="theme-checkbox" onchange="toggleTheme()">
+            <span class="slider">
+              <svg class="slider-icon sun-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              <svg class="slider-icon moon-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </span>
+          </label>
+        </div>
+        
+        <a href="/" class="btn btn-outline btn-sm">
+          <i data-lucide="external-link"></i> Client Site
+        </a>
+        <button class="btn btn-danger btn-sm" onclick="handleAdminLogout()">
+          <i data-lucide="log-out"></i> Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  
+  <div class="admin-wrapper" style="padding-top: 120px;">
+    <div class="container">
+      
+      <div class="admin-header">
+        <div>
+          <h1 style="font-size: 2rem;">Noble Node Admin Center</h1>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">Manage plans and site content. Payment processing and live server provisioning are not connected.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn btn-outline btn-sm" onclick="openAddTestimonialModal()">
+            <i data-lucide="message-square"></i> Add Review
+          </button>
+          <button class="btn btn-primary btn-sm" onclick="openAddCouponModal()">
+            <i data-lucide="plus"></i> Add Coupon
+          </button>
+          <button class="btn btn-outline btn-sm" onclick="openAddPlanModal()">
+            <i data-lucide="plus"></i> Add Package
+          </button>
+        </div>
+      </div>
+
+      <section class="nn-admin-overview" aria-label="Admin data overview">
+        <div class="nn-admin-stat"><span>PLAN TIERS</span><strong id="admin-stat-plans">—</strong></div>
+        <div class="nn-admin-stat"><span>COUPONS</span><strong id="admin-stat-coupons">—</strong></div>
+        <div class="nn-admin-stat"><span>FAQ ENTRIES</span><strong id="admin-stat-faqs">—</strong></div>
+        <div class="nn-admin-stat"><span>RECORDED ORDERS</span><strong id="admin-stat-orders">—</strong></div>
+      </section>
+
+      
+      <div class="admin-nav-tabs">
+        <button class="admin-tab-btn active" id="tab-btn-coupons" onclick="switchAdminTab('coupons')">
+          <i data-lucide="tag"></i> Coupons Manager
+        </button>
+        <button class="admin-tab-btn" id="tab-btn-plans" onclick="switchAdminTab('plans')">
+          <i data-lucide="box"></i> Packages & Plans
+        </button>
+        <button class="admin-tab-btn" id="tab-btn-testimonials" onclick="switchAdminTab('testimonials')">
+          <i data-lucide="message-square"></i> Players Saying (Testimonials)
+        </button>
+        <button class="admin-tab-btn" id="tab-btn-faqs" onclick="switchAdminTab('faqs')">
+          <i data-lucide="help-circle"></i> FAQ Manager
+        </button>
+        <button class="admin-tab-btn" id="tab-btn-orders" onclick="switchAdminTab('orders')">
+          <i data-lucide="file-text"></i> Orders Log
+        </button>
+      </div>
+
+      
+      <div class="admin-tab-content" id="tab-coupons">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h2 style="font-size: 1.4rem;">Discount Coupon Codes</h2>
+          <button class="btn btn-primary btn-sm" onclick="openAddCouponModal()">
+            <i data-lucide="plus"></i> Create New Coupon
+          </button>
+        </div>
+
+        <div class="admin-table-card">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Coupon Code</th>
+                <th>Discount Rate</th>
+                <th>Flat PKR Discount</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="coupons-table-body">
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      
+      <div class="admin-tab-content" id="tab-plans" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h2 style="font-size: 1.4rem;">Hosting Packages & Tiers</h2>
+          <button class="btn btn-primary btn-sm" onclick="openAddPlanModal()">
+            <i data-lucide="plus"></i> Add New Package
+          </button>
+        </div>
+
+        <div class="admin-table-card">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Package Name</th>
+                <th>RAM / CPU</th>
+                <th>NVMe Storage</th>
+                <th>PKR Price</th>
+                <th>USD Price</th>
+                <th>Category</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="plans-table-body">
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      
+      <div class="admin-tab-content" id="tab-testimonials" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h2 style="font-size: 1.4rem;">Players Saying (Community Testimonials)</h2>
+          <button class="btn btn-primary btn-sm" onclick="openAddTestimonialModal()">
+            <i data-lucide="plus"></i> Add New Review
+          </button>
+        </div>
+
+        <div class="admin-table-card">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th style="width: 20%;">Player Name</th>
+                <th style="width: 20%;">Role / SMP</th>
+                <th style="width: 10%;">Stars</th>
+                <th style="width: 35%;">Testimonial Content</th>
+                <th style="width: 15%;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="testimonials-table-body">
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      
+      <div class="admin-tab-content" id="tab-faqs" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h2 style="font-size: 1.4rem;">Frequently Asked Questions</h2>
+          <button class="btn btn-primary btn-sm" onclick="openAddFaqModal()">
+            <i data-lucide="plus"></i> Add New FAQ
+          </button>
+        </div>
+
+        <div class="admin-table-card">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th style="width: 35%;">Question</th>
+                <th style="width: 50%;">Answer</th>
+                <th style="width: 15%;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="faqs-table-body">
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      
+      <div class="admin-tab-content" id="tab-orders" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h2 style="font-size: 1.4rem;">Customer Orders History</h2>
+          <button class="btn btn-outline btn-sm" onclick="loadAdminData()">
+            <i data-lucide="rotate-cw"></i> Refresh Orders
+          </button>
+        </div>
+
+        <div class="admin-table-card">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Package</th>
+                <th>Server Subdomain</th>
+                <th>Location</th>
+                <th>Payment</th>
+                <th>Total PKR</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="orders-table-body">
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  
+  <div class="modal-overlay" id="coupon-modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeAdminModals()"><i data-lucide="x"></i></button>
+      <h2 style="margin-bottom: 1rem;" id="coupon-modal-title">Create Coupon Code</h2>
+      <form onsubmit="handleSaveCoupon(event)">
+        <div class="form-group">
+          <label>Coupon Code Name</label>
+          <input type="text" id="coupon-code-input" class="form-control" placeholder="e.g. AZADI25" required style="text-transform: uppercase;">
+        </div>
+        <div class="form-group">
+          <label>Discount Percentage (%)</label>
+          <input type="number" id="coupon-pct-input" class="form-control" placeholder="e.g. 20" value="0">
+        </div>
+        <div class="form-group">
+          <label>Flat PKR Discount Amount (₨)</label>
+          <input type="number" id="coupon-flat-input" class="form-control" placeholder="e.g. 500" value="0">
+        </div>
+        <div class="form-group">
+          <label>Short Description</label>
+          <input type="text" id="coupon-desc-input" class="form-control" placeholder="e.g. Independence Day Promo">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Save Coupon Code</button>
+      </form>
+    </div>
+  </div>
+
+  
+  <div class="modal-overlay" id="plan-modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeAdminModals()"><i data-lucide="x"></i></button>
+      <h2 style="margin-bottom: 1rem;">Add New Package</h2>
+      <form onsubmit="handleSavePlan(event)">
+        <input type="hidden" id="plan-id-input">
+        <div class="form-group">
+          <label>Package Name</label>
+          <input type="text" id="plan-name-input" class="form-control" placeholder="e.g. Ultra Netherite" required>
+        </div>
+        <div class="form-group">
+          <label>RAM Allocation</label>
+          <input type="text" id="plan-ram-input" class="form-control" placeholder="e.g. 12 GB DDR5 ECC" required>
+        </div>
+        <div class="form-group">
+          <label>CPU Allocation</label>
+          <input type="text" id="plan-cpu-input" class="form-control" placeholder="e.g. 400% Ryzen 9" required>
+        </div>
+        <div class="form-group">
+          <label>NVMe SSD Storage</label>
+          <input type="text" id="plan-storage-input" class="form-control" placeholder="e.g. 100 GB NVMe" required>
+        </div>
+        <div class="form-group">
+          <label>PKR Price / Mo (₨)</label>
+          <input type="number" id="plan-pkr-input" class="form-control" placeholder="e.g. 5500" required>
+        </div>
+        <div class="form-group">
+          <label>USD Price / Mo ($)</label>
+          <input type="number" step="0.01" id="plan-usd-input" class="form-control" placeholder="e.g. 19.90" required>
+        </div>
+        <div class="form-group">
+          <label>Badge Tag</label>
+          <input type="text" id="plan-badge-input" class="form-control" placeholder="e.g. Popular Choice">
+        </div>
+        <div class="form-group">
+          <label>Target Software Category</label>
+          <select id="plan-category-input" class="form-control">
+            <option value="paper">Paper / Spigot</option>
+            <option value="forge">Forge / Fabric Modpacks</option>
+            <option value="bedrock">Bedrock Crossplay</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Save Package</button>
+      </form>
+    </div>
+  </div>
+
+  
+  <div class="modal-overlay" id="testimonial-modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeAdminModals()"><i data-lucide="x"></i></button>
+      <h2 style="margin-bottom: 1rem;" id="testimonial-modal-title">Add Player Testimonial</h2>
+      <form onsubmit="handleSaveTestimonial(event)">
+        <input type="hidden" id="testimonial-id-input">
+        <div class="form-group">
+          <label>Player Name</label>
+          <input type="text" id="testimonial-name-input" class="form-control" placeholder="e.g. Bilal Ahmed" required>
+        </div>
+        <div class="form-group">
+          <label>Role / Server Title</label>
+          <input type="text" id="testimonial-role-input" class="form-control" placeholder="e.g. Lahore SMP Owner" required>
+        </div>
+        <div class="form-group">
+          <label>Star Rating (1-5)</label>
+          <input type="number" min="1" max="5" id="testimonial-stars-input" class="form-control" value="5" required>
+        </div>
+        <div class="form-group">
+          <label>Initials / Avatar Code</label>
+          <input type="text" id="testimonial-avatar-input" class="form-control" placeholder="e.g. BA">
+        </div>
+        <div class="form-group">
+          <label>Testimonial Review Text</label>
+          <textarea id="testimonial-text-input" class="form-control" rows="4" placeholder="Review details..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Save Review</button>
+      </form>
+    </div>
+  </div>
+
+  
+  <div class="modal-overlay" id="faq-modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeAdminModals()"><i data-lucide="x"></i></button>
+      <h2 style="margin-bottom: 1rem;">Add FAQ Question</h2>
+      <form onsubmit="handleSaveFaq(event)">
+        <input type="hidden" id="faq-id-input">
+        <div class="form-group">
+          <label>Question</label>
+          <input type="text" id="faq-question-input" class="form-control" placeholder="e.g. How do I install plugins?" required>
+        </div>
+        <div class="form-group">
+          <label>Answer</label>
+          <textarea id="faq-answer-input" class="form-control" rows="4" placeholder="Detailed answer..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Save FAQ Question</button>
+      </form>
+    </div>
+  </div>
+
+  
+  <script src="/static/js/admin.js?v=5000"></script>
+</body>
+</html>

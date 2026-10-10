@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minecraft Server Hosting Plans & Pricing in PKR | Noble Node</title>
+  <meta name="description" content="Compare high-performance AMD Ryzen 9 Minecraft server hosting packages in Pakistan. Instant EasyPaisa & JazzCash checkout, 12+ Tbps DDoS defense, and NVMe Gen4 storage.">
+  <link rel="canonical" href="https://noblenode.host/plans">
+  <meta property="og:title" content="Minecraft Server Hosting Plans & Pricing in PKR | Noble Node">
+  <meta property="og:description" content="Compare Ryzen 9 9950X / 7950X3D plans in Pakistani Rupees with free 12+ Tbps DDoS protection and instant EasyPaisa checkout.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://noblenode.host/plans">
+  <meta property="og:site_name" content="Noble Node">
+  <meta property="og:image" content="https://noblenode.host/static/images/logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#10241e">
+  <link rel="icon" type="image/png" href="/static/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/noble.css?v=2">
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Noble Node Minecraft Server Hosting",
+    "description": "Enterprise Ryzen 9 Minecraft hosting with Lahore and Karachi server locations in Pakistan.",
+    "brand": {
+      "@type": "Brand",
+      "name": "Noble Node"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "PKR",
+      "lowPrice": "2200",
+      "highPrice": "16500",
+      "offerCount": "4"
+    }
+  }
+  </script>
+</head>
+<body class="noble-site nn-pricing-page">
+  <div class="nn-nav-space" aria-hidden="true"></div>
+  <header class="nn-nav" id="navbar">
+    <div class="nn-nav-inner">
+      <a class="nn-brand" href="/" aria-label="Noble Node home">
+        <img src="/static/images/logo.png" alt="Noble Node" width="34" height="34" loading="lazy" decoding="async">
+        <span>NOBLE NODE</span>
+      </a>
+      <nav class="nn-nav-links" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/plans" aria-current="page">Plans</a>
+        <a href="/trusted-by">Trusted Servers</a>
+        <a href="/utilities">Tools</a>
+        <a href="/faq">FAQ</a>
+        <a href="https://discord.noblenode.host">Discord</a>
+      </nav>
+      <div class="nn-nav-actions">
+        {% if current_user %}
+        <a class="nn-login-link" href="/dashboard">Dashboard</a>
+        <a class="nn-login-link nn-logout-btn" href="/logout">Sign out</a>
+        {% else %}
+        <a class="nn-login-link" href="/auth?mode=signin">Sign in</a>
+        <a class="nn-button nn-button-small" href="/auth?mode=signup">Create account <span aria-hidden="true">↗</span></a>
+        {% endif %}
+        <button class="nn-menu-button" type="button" id="hamburger-btn" aria-label="Open menu" onclick="openMobileMenu()"><i data-lucide="menu"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nn-mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+    <button class="nn-mobile-close" type="button" aria-label="Close menu" onclick="closeMobileMenu()"><i data-lucide="x"></i></button>
+    <a href="/" onclick="closeMobileMenu()">Home</a>
+    <a href="/plans" onclick="closeMobileMenu()">Plans</a>
+    <a href="/trusted-by" onclick="closeMobileMenu()">Trusted Servers</a>
+    <a href="/utilities" onclick="closeMobileMenu()">Server tools</a>
+    <a href="/faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="https://discord.noblenode.host" onclick="closeMobileMenu()">Join Discord</a>
+    {% if current_user %}
+    <a href="/dashboard" onclick="closeMobileMenu()">Dashboard</a>
+    <a href="/logout" onclick="closeMobileMenu()">Sign out</a>
+    {% else %}
+    <a href="/auth?mode=signin" onclick="closeMobileMenu()">Sign in</a>
+    <a class="nn-button" href="/auth?mode=signup" onclick="closeMobileMenu()">Create account ↗</a>
+    {% endif %}
+  </div>
+
+  <main>
+    <section class="nn-pricing-hero">
+      <p class="nn-eyebrow nn-eyebrow-dark"><span class="nn-live-dot"></span> TRANSPARENT LOCAL PRICING IN PKR</p>
+      <h1>A plan for<br><span>your kind of world.</span></h1>
+      <p>Compare our AMD Ryzen 9 9950X & 7950X3D tiers side by side. All plans include automated daily backups, Gen4 NVMe storage, unmetered bandwidth, and 12+ Tbps DDoS mitigation.</p>
+      <div class="nn-price-units">
+        <span>PKR / MONTH</span>
+        <span>EASYPAISA & JAZZCASH</span>
+        <span>12+ TBPS DDOS SHIELD</span>
+      </div>
+    </section>
+
+    <!-- Plans Cards Grid -->
+    <section class="nn-plans-section nn-plans-page-section" id="plans">
+      <div class="nn-currency-switch-bar">
+        <span>Display currency:</span>
+        <button type="button" class="nn-currency-btn active" id="curr-pkr-btn" onclick="switchCurrency('PKR')">PKR (Pakistani Rupee)</button>
+        <button type="button" class="nn-currency-btn" id="curr-usd-btn" onclick="switchCurrency('USD')">USD ($)</button>
+      </div>
+
+      <div class="nn-pricing-grid" id="pricing-grid" aria-live="polite">
+        {% for plan in plans|default([]) %}
+        <article class="nn-plan nn-plan-{{ loop.index }} {% if plan.recommended %}nn-plan-featured{% endif %}">
+          {% if plan.badge %}<div class="nn-plan-label">{{ plan.badge }}</div>{% endif %}
+          <h3>{{ plan.ram }}</h3>
+          <ul class="nn-plan-specs">
+            <li><i data-lucide="cpu" aria-hidden="true"></i><span>{{ plan.cpu }}</span></li>
+            <li><i data-lucide="hard-drive" aria-hidden="true"></i><span>{{ plan.storage }}</span></li>
+            <li><i data-lucide="archive" aria-hidden="true"></i><span>{{ plan.backups }}</span></li>
+            <li><i data-lucide="users" aria-hidden="true"></i><span>{{ plan.slots }}</span></li>
+          </ul>
+          <div class="nn-plan-protection">
+            <i data-lucide="shield-check" aria-hidden="true"></i>
+            <span>{{ plan.ddos_protection }}</span>
+          </div>
+          <div class="nn-plan-price-row">
+            <p class="nn-plan-price" data-pkr="{{ plan.pkr_price }}" data-usd="{{ plan.usd_price }}">
+              <span class="nn-curr-sym">PKR</span> <span class="nn-price-val">{{ "{:,}".format(plan.pkr_price) if plan.pkr_price else "2,200" }}</span>
+            </p>
+            <p class="nn-plan-period">/ month</p>
+          </div>
+          <a class="nn-plan-action" href="/checkout?plan={{ plan.id }}">
+            Configure & Deploy <span aria-hidden="true">🚀</span>
+          </a>
+        </article>
+        {% endfor %}
+      </div>
+      <p class="nn-pricing-note">
+        All plans are backed by instant deployment in under 60 seconds. EasyPaisa, JazzCash, SadaPay, Card, and Raast accepted.
+      </p>
+    </section>
+
+    <!-- Plan Comparer Section (NEW) -->
+    <section class="nn-plan-comparer-section" id="compare">
+      <div class="nn-comparer-container">
+        <div class="nn-section-head">
+          <div>
+            <p class="nn-eyebrow nn-eyebrow-dark">DEEP SPEC SHEET</p>
+            <h2>Plan Comparer Matrix</h2>
+          </div>
+          <p>Every resource specification laid bare side by side. Pick the exact hardware allocation your world requires.</p>
+        </div>
+
+        <div class="nn-comparer-table-wrapper">
+          <table class="nn-comparer-table">
+            <thead>
+              <tr>
+                <th class="nn-th-feature">Feature / Resource</th>
+                {% for plan in plans|default([]) %}
+                <th class="nn-th-plan {% if plan.recommended %}nn-th-featured{% endif %}">
+                  {% if plan.badge %}<span class="nn-tbl-badge">{{ plan.badge }}</span>{% endif %}
+                  <strong>{{ plan.ram }}</strong>
+                  <div class="nn-tbl-price" data-pkr="{{ plan.pkr_price }}" data-usd="{{ plan.usd_price }}">
+                    PKR {{ "{:,}".format(plan.pkr_price) if plan.pkr_price else "2,200" }}<small>/mo</small>
+                  </div>
+                  <a href="/checkout?plan={{ plan.id }}" class="nn-tbl-cta">Select</a>
+                </th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="nn-row-category"><td colspan="5">Compute & Hardware Core</td></tr>
+              <tr>
+                <td class="nn-td-label"><strong>CPU Architecture</strong><span>Base & Boost Clocks</span></td>
+                <td>AMD Ryzen 9 9950X / 7950X3D (up to 5.7 GHz)</td>
+                <td>AMD Ryzen 9 9950X / 7950X3D (up to 5.7 GHz)</td>
+                <td class="nn-td-featured">AMD Ryzen 9 9950X / 7950X3D (up to 5.7 GHz)</td>
+                <td>AMD Ryzen 9 9950X (Dedicated Cores)</td>
+              </tr>
+              <tr>
+                <td class="nn-td-label"><strong>CPU vCore Allocation</strong><span>Allocated threads</span></td>
+                <td>4 vCores</td>
+                <td>6 vCores</td>
+                <td class="nn-td-featured">8 vCores</td>
+                <td>8 Dedicated vCores</td>
+              </tr>
+              <tr>
+                <td class="nn-td-label"><strong>Memory (RAM)</strong><span>DDR5 6000MHz</span></td>
+                <td>8 GB DDR5</td>
+                <td>16 GB DDR5</td>
+                <td class="nn-td-featured">32 GB DDR5</td>
+                <td>64 GB DDR5</td>
+              </tr>
+              <tr>
+                <td class="nn-td-label"><strong>Storage Type</strong><span>NVMe PCIe 4.0</span></td>
+                <td>120 GB Gen4 NVMe</td>
+                <td>240 GB Gen4 NVMe</td>
+                <td class="nn-td-featured">480 GB Gen4 NVMe</td>
+                <td>960 GB Gen4 NVMe</td>
+              </tr>
+
+              <tr class="nn-row-category"><td colspan="5">Network & Security Infrastructure</td></tr>
+              <tr>
+                <td class="nn-td-label"><strong>DDoS Mitigation Capacity</strong><span>Always-on inline</span></td>
+                <td>12+ Tbps Corero & Path.net</td>
+                <td>12+ Tbps Corero & Path.net</td>
+                <td class="nn-td-featured">12+ Tbps Corero & Path.net</td>
+                <td>12+ Tbps Corero & Path.net</td>
+              </tr>
+              <tr>
+                <td class="nn-td-label"><strong>Minecraft Layer 7 Defense</strong><span>Botnet, NullPing, Handshake</span></td>
+                <td>✓ Included Free</td>
+                <td>✓ Included Free</td>
+                <td class="nn-td-featured">✓ Included Free</td>
+                <td>✓ Included Free</td>
+              </tr>
+              <tr>
+                <td class="nn-td-label"><strong>Pakistani Server Locations</strong><span>Karachi & Lahore native nodes</span></td>
+                <td>Karachi & Lahore (5-15ms)</td>
+                <td>Karachi & Lahore (5-15ms)</td>
+                <td class="nn-td-featured">Karachi & Lahore (5-15ms)</td>
+                <td>Karachi & Lahore (5-15ms)</td>
+              </tr>
+              <tr>
+                <td class="nn-td-label"><strong>Uplink Port Speed</strong><span>Redundant fiber bandwidth</span></td>
+                <td>10 Gbps Redundant</td>
+                <td>10 Gbps Redundant</td>
+                <td class="nn-td-featured">10 Gbps Redundant</td>
+                <td>10 Gbps Redundant</td>
+              </tr>
+
+              <tr class="nn-row-category"><td colspan="5">Platform Features & Management</td></tr>
+              <tr>
+                <td class="nn-td-label"><strong>Automated Daily Backups</strong><span>Off-site cloud snapshots</span></td>
+                <td>3 Backup Slots</td>
+                <td>5 Backup Slots</td>
+                <td class="nn-td-featured">10 Backup Slots</td>
+                <td>Unlimited Daily Backups</td>
+              </tr>
+              <tr>
+                <td class="nn-td-label"><strong>Player Slots</strong><span>Join limit</span></td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+                <td class="nn-td-featured">Unlimited</td>
+                <td>Unlimited</td>
+              </tr>
+              <tr>
+                <td class="nn-td-label"><strong>Custom Subdomain</strong><span>Free address</span></td>
+                <td>yourname.noblenode.host</td>
+                <td>yourname.noblenode.host</td>
+                <td class="nn-td-featured">yourname.noblenode.host</td>
+                <td>yourname.noblenode.host</td>
+              </tr>
+              <tr>
+                <td class="nn-td-label"><strong>MySQL Database</strong><span>Free included</span></td>
+                <td>1 Database</td>
+                <td>2 Databases</td>
+                <td class="nn-td-featured">5 Databases</td>
+                <td>Unlimited Databases</td>
+              </tr>
+              <tr>
+                <td class="nn-td-label"><strong>Control Panel</strong><span>Pterodactyl-based</span></td>
+                <td>Noble Panel</td>
+                <td>Noble Panel</td>
+                <td class="nn-td-featured">Noble Panel</td>
+                <td>Noble Panel</td>
+              </tr>
+              <tr>
+                <td class="nn-td-label"><strong>Bedrock Cross-Play (Geyser)</strong><span>Mobile/Xbox/PS5 support</span></td>
+                <td>✓ 1-Click Setup</td>
+                <td>✓ 1-Click Setup</td>
+                <td class="nn-td-featured">✓ 1-Click Setup</td>
+                <td>✓ 1-Click Setup</td>
+              </tr>
+              <tr>
+                <td class="nn-td-label"><strong>Modpack Installer</strong><span>CurseForge & Modrinth</span></td>
+                <td>✓ 1-Click Install</td>
+                <td>✓ 1-Click Install</td>
+                <td class="nn-td-featured">✓ 1-Click Install</td>
+                <td>✓ 1-Click Install</td>
+              </tr>
+              <tr>
+                <td class="nn-td-label"><strong>Ideal Workload</strong><span>Player count guidance</span></td>
+                <td>1–20 Players (Vanilla/SMP)</td>
+                <td>20–50 Players (Modded/Plugins)</td>
+                <td class="nn-td-featured">50–150 Players (Large SMP/Modpacks)</td>
+                <td>150+ Players (Networks/Bungee)</td>
+              </tr>
+              <tr>
+                <td class="nn-td-label"><strong>Deploy Now</strong></td>
+                {% for plan in plans|default([]) %}
+                <td class="{% if plan.recommended %}nn-td-featured{% endif %}">
+                  <a href="/checkout?plan={{ plan.id }}" class="nn-button nn-button-small nn-button-block">Deploy 🚀</a>
+                </td>
+                {% endfor %}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- DDoS & Security Highlight Band -->
+    <section class="nn-ddos-advert-section">
+      <div class="nn-ddos-advert-inner">
+        <div class="nn-ddos-badge-header">
+          <span class="nn-shield-pulse">🛡️</span>
+          <p class="nn-eyebrow nn-eyebrow-dark">MULTI-TERABIT PROTECTION</p>
+        </div>
+        <h2>Enterprise 12+ Tbps DDoS Defense Included Free</h2>
+        <p>
+          Unlike hosts that charge extra for basic security, Noble Node shields every server with Corero and Path.net multi-terabit filtering. Our gaming filters analyze traffic at line rate, mitigating SYN floods, UDP amplification, botnet join floods, and packet exploits in under 1 millisecond.
+        </p>
+        <div class="nn-ddos-highlights-grid">
+          <div><strong>12+ Tbps</strong><span>Total Scrubbing Capacity</span></div>
+          <div><strong>&lt; 1 ms</strong><span>Attack Mitigation Time</span></div>
+          <div><strong>Layer 3, 4 & 7</strong><span>Minecraft Specific Game Rules</span></div>
+          <div><strong>PKR 0 Extra</strong><span>Included on Every Tier</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="nn-plan-help">
+      <div>
+        <p class="nn-eyebrow">NEED HELP CHOOSING?</p>
+        <h2>Not sure which plan fits your world?</h2>
+        <p>Our support team and community can guide you based on your plugins, mods, and expected player base.</p>
+      </div>
+      <div class="nn-help-actions">
+        <a class="nn-button nn-button-lime" href="/faq">Read the FAQs ↗</a>
+        <a class="nn-button nn-button-dark" href="https://discord.noblenode.host">Ask on Discord ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="nn-footer">
+    <a class="nn-brand" href="/" aria-label="Noble Node home">
+      <img src="/static/images/logo.png" alt="Noble Node" width="34" height="34" loading="lazy" decoding="async">
+      <span>NOBLE NODE</span>
+    </a>
+    <span>Minecraft server hosting · <a href="https://noblenode.host/">noblenode.host</a></span>
+    <nav aria-label="Footer navigation">
+      <a href="/plans" aria-current="page">Plans</a>
+      <a href="/trusted-by">Trusted Servers</a>
+      <a href="/utilities">Tools</a>
+      <a href="/faq">FAQ</a>
+      <a href="https://discord.noblenode.host">Discord</a>
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+    </nav>
+    <span>© 2026 Noble Node</span>
+  </footer>
+
+  <script>
+    function switchCurrency(curr) {
+      document.getElementById('curr-pkr-btn').classList.toggle('active', curr === 'PKR');
+      document.getElementById('curr-usd-btn').classList.toggle('active', curr === 'USD');
+
+      document.querySelectorAll('.nn-plan-price').forEach(el => {
+        const pkr = parseInt(el.getAttribute('data-pkr')) || 2200;
+        const usd = parseFloat(el.getAttribute('data-usd')) || 7.95;
+        const sym = el.querySelector('.nn-curr-sym');
+        const val = el.querySelector('.nn-price-val');
+        if (curr === 'PKR') {
+          sym.textContent = 'PKR';
+          val.textContent = pkr.toLocaleString();
+        } else {
+          sym.textContent = '$';
+          val.textContent = usd.toFixed(2);
+        }
+      });
+
+      document.querySelectorAll('.nn-tbl-price').forEach(el => {
+        const pkr = parseInt(el.getAttribute('data-pkr')) || 2200;
+        const usd = parseFloat(el.getAttribute('data-usd')) || 7.95;
+        if (curr === 'PKR') {
+          el.innerHTML = `PKR ${pkr.toLocaleString()}<small>/mo</small>`;
+        } else {
+          el.innerHTML = `$${usd.toFixed(2)}<small>/mo</small>`;
+        }
+      });
+    }
+  </script>
+  <script src="/static/js/main.js?v=noble2"></script>
+</body>
+</html>

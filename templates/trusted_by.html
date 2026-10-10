@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trusted by Leading Servers & SMPs | Noble Node</title>
+  <meta name="description" content="Discover popular Pakistani Minecraft SMPs, Bungee networks, and modded servers powered by Noble Node's Ryzen 9 infrastructure and 12+ Tbps DDoS defense.">
+  <link rel="canonical" href="https://noblenode.host/trusted-by">
+  <meta property="og:title" content="Trusted by Leading Servers & SMPs | Noble Node">
+  <meta property="og:description" content="Explore top Pakistani Minecraft communities and SMPs running lag-free on Noble Node.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://noblenode.host/trusted-by">
+  <meta property="og:site_name" content="Noble Node">
+  <meta property="og:image" content="https://noblenode.host/static/images/logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#10241e">
+  <link rel="icon" type="image/png" href="/static/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/noble.css?v=2">
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Minecraft Servers Hosted on Noble Node",
+    "description": "Featured Pakistani Minecraft servers and SMPs running on Noble Node nodes.",
+    "itemListElement": [
+      {% for server in trusted_servers|default([]) %}
+      {
+        "@type": "ListItem",
+        "position": {{ loop.index }},
+        "name": {{ server.name|tojson }},
+        "description": {{ server.gamemode|tojson }}
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+  </script>
+</head>
+<body class="noble-site nn-trusted-page">
+  <div class="nn-nav-space" aria-hidden="true"></div>
+  <header class="nn-nav" id="navbar">
+    <div class="nn-nav-inner">
+      <a class="nn-brand" href="/" aria-label="Noble Node home">
+        <img src="/static/images/logo.png" alt="Noble Node" width="34" height="34" loading="lazy" decoding="async">
+        <span>NOBLE NODE</span>
+      </a>
+      <nav class="nn-nav-links" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/plans">Plans</a>
+        <a href="/trusted-by" aria-current="page">Trusted Servers</a>
+        <a href="/utilities">Tools</a>
+        <a href="/faq">FAQ</a>
+        <a href="https://discord.noblenode.host">Discord</a>
+      </nav>
+      <div class="nn-nav-actions">
+        {% if current_user %}
+        <a class="nn-login-link" href="/dashboard">Dashboard</a>
+        <a class="nn-login-link nn-logout-btn" href="/logout">Sign out</a>
+        {% else %}
+        <a class="nn-login-link" href="/auth?mode=signin">Sign in</a>
+        <a class="nn-button nn-button-small" href="/auth?mode=signup">Create account <span aria-hidden="true">↗</span></a>
+        {% endif %}
+        <button class="nn-menu-button" type="button" id="hamburger-btn" aria-label="Open menu" onclick="openMobileMenu()"><i data-lucide="menu"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nn-mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+    <button class="nn-mobile-close" type="button" aria-label="Close menu" onclick="closeMobileMenu()"><i data-lucide="x"></i></button>
+    <a href="/" onclick="closeMobileMenu()">Home</a>
+    <a href="/plans" onclick="closeMobileMenu()">Plans</a>
+    <a href="/trusted-by" onclick="closeMobileMenu()">Trusted Servers</a>
+    <a href="/utilities" onclick="closeMobileMenu()">Server tools</a>
+    <a href="/faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="https://discord.noblenode.host" onclick="closeMobileMenu()">Join Discord</a>
+    {% if current_user %}
+    <a href="/dashboard" onclick="closeMobileMenu()">Dashboard</a>
+    <a href="/logout" onclick="closeMobileMenu()">Sign out</a>
+    {% else %}
+    <a href="/auth?mode=signin" onclick="closeMobileMenu()">Sign in</a>
+    <a class="nn-button" href="/auth?mode=signup" onclick="closeMobileMenu()">Create account ↗</a>
+    {% endif %}
+  </div>
+
+  <main>
+    <!-- Trusted Page Hero -->
+    <section class="nn-trusted-hero">
+      <div class="nn-trusted-hero-inner">
+        <p class="nn-eyebrow nn-eyebrow-dark"><span class="nn-live-dot"></span> VERIFIED COMMUNITIES & NETWORKS</p>
+        <h1>Trusted by the best servers<br><span>in Pakistan.</span></h1>
+        <p class="nn-trusted-lede">
+          From competitive Lifesteal SMPs and towny worlds to 200+ player Bungee networks and Bedrock cross-play hubs — discover the gaming communities that rely on Noble Node for rock-solid 20 TPS and zero DDoS downtime.
+        </p>
+
+        <!-- Stats Bar -->
+        <div class="nn-trusted-stats">
+          <div class="nn-stat-box">
+            <strong>10,000+</strong>
+            <span>Active Players Hosted</span>
+          </div>
+          <div class="nn-stat-box">
+            <strong>20.0</strong>
+            <span>Average Server TPS</span>
+          </div>
+          <div class="nn-stat-box">
+            <strong>99.98%</strong>
+            <span>Verified Node Uptime</span>
+          </div>
+          <div class="nn-stat-box">
+            <strong>12+ Tbps</strong>
+            <span>DDoS Shield Capacity</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Servers Grid -->
+    <section class="nn-servers-section">
+      <div class="nn-servers-container">
+        <div class="nn-section-head">
+          <div>
+            <p class="nn-eyebrow nn-eyebrow-dark">COMMUNITY SHOWCASE</p>
+            <h2>Explore Featured Servers</h2>
+          </div>
+          <p>Click any server address to copy the IP and connect in Minecraft.</p>
+        </div>
+
+        <div class="nn-servers-grid">
+          {% for server in trusted_servers|default([]) %}
+          <article class="nn-server-card">
+            <div class="nn-server-top">
+              <div class="nn-server-identity">
+                <span class="nn-server-icon">{{ server.name[:2]|upper }}</span>
+                <div>
+                  <h3>{{ server.name }}</h3>
+                  <span class="nn-server-status"><span class="nn-live-dot"></span> {{ server.status }} · {{ server.players }}</span>
+                </div>
+              </div>
+              <span class="nn-verified-badge"><i data-lucide="check-circle"></i> Verified</span>
+            </div>
+
+            <p class="nn-server-gamemode">{{ server.gamemode }}</p>
+
+            <div class="nn-server-meta">
+              <div><span>Version:</span> <strong>{{ server.version }}</strong></div>
+              <div><span>Location:</span> <strong>{{ server.location }}</strong></div>
+              <div><span>Plan:</span> <strong>{{ server.plan }}</strong></div>
+            </div>
+
+            {% if server.quote %}
+            <blockquote class="nn-server-quote">
+              "{{ server.quote }}"
+            </blockquote>
+            {% endif %}
+
+            <div class="nn-server-actions">
+              <button class="nn-copy-ip-btn" type="button" onclick="copyServerIp('{{ server.ip }}', this)">
+                <i data-lucide="copy"></i>
+                <span>{{ server.ip }}</span>
+              </button>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- Get Featured CTA Banner -->
+    <section class="nn-get-featured-section">
+      <div class="nn-get-featured-box">
+        <div class="nn-featured-copy">
+          <p class="nn-eyebrow"><span class="nn-live-dot"></span> COMMUNITY RECOGNITION</p>
+          <h2>Want your server featured here?</h2>
+          <p>Every active community hosting on Noble Node is eligible for our Verified Server Partner Directory, custom subdomain routing, and priority Discord support.</p>
+        </div>
+        <div class="nn-featured-action">
+          <a class="nn-button nn-button-lime" href="/checkout">Deploy Your Server Now 🚀</a>
+          <a class="nn-text-link" href="https://discord.noblenode.host">Submit on Discord ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews Snippet -->
+    <section class="nn-trusted-reviews-section">
+      <div class="nn-trusted-reviews-inner">
+        <div class="nn-section-head">
+          <div>
+            <p class="nn-eyebrow nn-eyebrow-dark">WHAT OWNERS SAY</p>
+            <h2>Built by gamers for gamers.</h2>
+          </div>
+          <p>Real experiences from Pakistani server founders who switched to Noble Node.</p>
+        </div>
+
+        <div class="nn-reviews-grid">
+          {% for t in (testimonials|default([]))[:3] %}
+          <div class="nn-review-card">
+            <div class="nn-review-stars">★★★★★</div>
+            <p class="nn-review-text">"{{ t.text }}"</p>
+            <div class="nn-review-author">
+              <div class="nn-review-avatar">{{ t.avatar }}</div>
+              <div>
+                <strong>{{ t.name }}</strong>
+                <small>{{ t.role }}</small>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="nn-footer">
+    <a class="nn-brand" href="/" aria-label="Noble Node home">
+      <img src="/static/images/logo.png" alt="Noble Node" width="34" height="34" loading="lazy" decoding="async">
+      <span>NOBLE NODE</span>
+    </a>
+    <span>Minecraft server hosting · <a href="https://noblenode.host/">noblenode.host</a></span>
+    <nav aria-label="Footer navigation">
+      <a href="/plans">Plans</a>
+      <a href="/trusted-by" aria-current="page">Trusted Servers</a>
+      <a href="/utilities">Tools</a>
+      <a href="/faq">FAQ</a>
+      <a href="https://discord.noblenode.host">Discord</a>
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+    </nav>
+    <span>© 2026 Noble Node</span>
+  </footer>
+
+  <script>
+    function copyServerIp(ip, btn) {
+      navigator.clipboard.writeText(ip).then(() => {
+        const span = btn.querySelector('span');
+        const orig = span.textContent;
+        span.textContent = 'Copied to clipboard!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          span.textContent = orig;
+          btn.classList.remove('copied');
+        }, 2200);
+      }).catch(() => {
+        prompt('Copy server address:', ip);
+      });
+    }
+  </script>
+  <script src="/static/js/main.js?v=noble2"></script>
+</body>
+</html>

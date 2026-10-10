@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deploy Server | Checkout | Noble Node</title>
+  <meta name="description" content="Configure and deploy your high-performance Ryzen 9 Minecraft server in Pakistan with instant EasyPaisa, JazzCash, or Card payment.">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#10241e">
+  <link rel="icon" type="image/png" href="/static/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/noble.css?v=2">
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+</head>
+<body class="noble-site nn-checkout-page">
+  <div class="nn-nav-space" aria-hidden="true"></div>
+  <header class="nn-nav" id="navbar">
+    <div class="nn-nav-inner">
+      <a class="nn-brand" href="/" aria-label="Noble Node home">
+        <img src="/static/images/logo.png" alt="Noble Node" width="34" height="34" loading="lazy" decoding="async">
+        <span>NOBLE NODE</span>
+      </a>
+      <nav class="nn-nav-links" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/plans">Plans</a>
+        <a href="/trusted-by">Trusted Servers</a>
+        <a href="/utilities">Tools</a>
+        <a href="/faq">FAQ</a>
+        <a href="https://discord.noblenode.host">Discord</a>
+      </nav>
+      <div class="nn-nav-actions">
+        {% if current_user %}
+        <a class="nn-login-link" href="/dashboard">Dashboard</a>
+        <a class="nn-login-link nn-logout-btn" href="/logout">Sign out</a>
+        {% else %}
+        <a class="nn-login-link" href="/auth?mode=signin">Sign in</a>
+        <a class="nn-button nn-button-small" href="/auth?mode=signup">Create account <span aria-hidden="true">↗</span></a>
+        {% endif %}
+        <button class="nn-menu-button" type="button" id="hamburger-btn" aria-label="Open menu" onclick="openMobileMenu()"><i data-lucide="menu"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nn-mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+    <button class="nn-mobile-close" type="button" aria-label="Close menu" onclick="closeMobileMenu()"><i data-lucide="x"></i></button>
+    <a href="/" onclick="closeMobileMenu()">Home</a>
+    <a href="/plans" onclick="closeMobileMenu()">Plans</a>
+    <a href="/trusted-by" onclick="closeMobileMenu()">Trusted Servers</a>
+    <a href="/utilities" onclick="closeMobileMenu()">Tools</a>
+    <a href="/faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="https://discord.noblenode.host" onclick="closeMobileMenu()">Discord</a>
+    {% if current_user %}
+    <a href="/dashboard" onclick="closeMobileMenu()">Dashboard</a>
+    <a href="/logout" onclick="closeMobileMenu()">Sign out</a>
+    {% else %}
+    <a href="/auth?mode=signin" onclick="closeMobileMenu()">Sign in</a>
+    <a class="nn-button" href="/auth?mode=signup" onclick="closeMobileMenu()">Create account ↗</a>
+    {% endif %}
+  </div>
+
+  <main class="nn-checkout-main">
+    <div class="nn-checkout-container">
+      <header class="nn-checkout-header">
+        <p class="nn-eyebrow nn-eyebrow-dark"><span class="nn-live-dot"></span> INSTANT SERVER PROVISIONING</p>
+        <h1>Configure & Deploy Your Server</h1>
+        <p>Ultra-low ping Pakistani nodes, enterprise 12+ Tbps DDoS defense, and instant EasyPaisa & JazzCash checkout in PKR.</p>
+      </header>
+
+      <form id="checkout-form" class="nn-checkout-grid" onsubmit="submitCheckoutOrder(event)">
+        <!-- Left: Configuration & Details -->
+        <div class="nn-checkout-config-col">
+          <!-- Step 1: Select Plan -->
+          <section class="nn-card nn-checkout-step">
+            <div class="nn-step-badge">STEP 01</div>
+            <h2>Choose Server Plan</h2>
+            <div class="nn-plan-selector-grid">
+              {% for plan in plans|default([]) %}
+              <label class="nn-plan-option {% if selected_plan and selected_plan.id == plan.id %}selected{% endif %}">
+                <input type="radio" name="plan_id" value="{{ plan.id }}" {% if selected_plan and selected_plan.id == plan.id %}checked{% endif %} onchange="updateSelectedPlanDetails('{{ plan.id }}')">
+                <div class="nn-plan-option-card">
+                  <div class="nn-plan-option-head">
+                    <strong>{{ plan.ram }}</strong>
+                    {% if plan.badge %}<span class="nn-option-pill">{{ plan.badge }}</span>{% endif %}
+                  </div>
+                  <p class="nn-plan-option-cpu">{{ plan.cpu }}</p>
+                  <p class="nn-plan-option-storage">{{ plan.storage }}</p>
+                  <div class="nn-plan-option-price">
+                    <strong>PKR {{ "{:,}".format(plan.pkr_price) if plan.pkr_price else "2,200" }}</strong>
+                    <small>/ month (~${{ "%.2f"|format(plan.usd_price) }})</small>
+                  </div>
+                </div>
+              </label>
+              {% endfor %}
+            </div>
+          </section>
+
+          <!-- Step 2: Server Settings -->
+          <section class="nn-card nn-checkout-step">
+            <div class="nn-step-badge">STEP 02</div>
+            <h2>Server Specifications</h2>
+            <div class="nn-form-row">
+              <div class="nn-field">
+                <label for="server-name">Server Name</label>
+                <input type="text" id="server-name" name="server_name" placeholder="e.g. Lahore SMP" required value="{{ user.name + '\'s World' if user else 'My Minecraft Server' }}">
+              </div>
+              <div class="nn-field">
+                <label for="server-subdomain">Free Subdomain Address</label>
+                <div class="nn-subdomain-input">
+                  <input type="text" id="server-subdomain" name="subdomain" placeholder="myserver" pattern="[a-zA-Z0-9-]+" required>
+                  <span>.noblenode.host</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="nn-form-row">
+              <div class="nn-field">
+                <label for="server-location">Node Location</label>
+                <select id="server-location" name="location">
+                  {% for loc in locations|default([]) %}
+                  <option value="{{ loc.id }}" {% if loc.id == 'lahore' %}selected{% endif %}>
+                    {{ loc.name }} ({{ loc.status }})
+                  </option>
+                  {% endfor %}
+                </select>
+                <small class="nn-field-hint">Karachi and Lahore nodes provide 5-15ms latency for Pakistani ISPs (Nayatel, PTCL, StormFiber).</small>
+              </div>
+              <div class="nn-field">
+                <label for="server-software">Server Software</label>
+                <select id="server-software" name="software">
+                  <option value="Paper 1.21.4" selected>Paper 1.21.4 (Recommended High-Performance)</option>
+                  <option value="Purpur 1.21.4">Purpur 1.21.4 (Max Customization & TPS)</option>
+                  <option value="Fabric 1.21">Fabric 1.21 (Modern Mods & Optimization)</option>
+                  <option value="Forge 1.20.1">Forge 1.20.1 (Heavy Modpacks)</option>
+                  <option value="Geyser Crossplay 1.21">GeyserMC (Java + Bedrock Cross-Play)</option>
+                  <option value="Vanilla 1.21.4">Vanilla 1.21.4</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step 3: Account Information -->
+          {% if not current_user %}
+          <section class="nn-card nn-checkout-step">
+            <div class="nn-step-badge">STEP 03</div>
+            <h2>Account Details</h2>
+            <p class="nn-step-desc">Your Noble Node account will be created automatically to manage your server.</p>
+            <div class="nn-form-row">
+              <div class="nn-field">
+                <label for="cust-name">Full Name</label>
+                <input type="text" id="cust-name" name="name" placeholder="e.g. Bilal Ahmed" required>
+              </div>
+              <div class="nn-field">
+                <label for="cust-email">Email Address</label>
+                <input type="email" id="cust-email" name="email" placeholder="you@example.com" required>
+              </div>
+            </div>
+            <div class="nn-field">
+              <label for="cust-password">Account Password</label>
+              <input type="password" id="cust-password" name="password" placeholder="At least 8 characters" minlength="8" required>
+            </div>
+          </section>
+          {% endif %}
+
+          <!-- Step 4: Payment Method -->
+          <section class="nn-card nn-checkout-step">
+            <div class="nn-step-badge">{% if not current_user %}STEP 04{% else %}STEP 03{% endif %}</div>
+            <h2>Payment Method (PKR & USD)</h2>
+            <div class="nn-payment-methods">
+              <label class="nn-pay-option selected">
+                <input type="radio" name="payment_method" value="EasyPaisa" checked onchange="togglePayDetails('easypaisa')">
+                <div class="nn-pay-card">
+                  <span class="nn-pay-icon">📱</span>
+                  <strong>EasyPaisa</strong>
+                  <small>Instant Mobile Wallet / QR</small>
+                </div>
+              </label>
+              <label class="nn-pay-option">
+                <input type="radio" name="payment_method" value="JazzCash" onchange="togglePayDetails('jazzcash')">
+                <div class="nn-pay-card">
+                  <span class="nn-pay-icon">⚡</span>
+                  <strong>JazzCash</strong>
+                  <small>Direct Wallet / Till ID</small>
+                </div>
+              </label>
+              <label class="nn-pay-option">
+                <input type="radio" name="payment_method" value="SadaPay / NayaPay" onchange="togglePayDetails('sadapay')">
+                <div class="nn-pay-card">
+                  <span class="nn-pay-icon">🏦</span>
+                  <strong>SadaPay / Raast</strong>
+                  <small>Instant IBAN / Bank Transfer</small>
+                </div>
+              </label>
+              <label class="nn-pay-option">
+                <input type="radio" name="payment_method" value="Card" onchange="togglePayDetails('card')">
+                <div class="nn-pay-card">
+                  <span class="nn-pay-icon">💳</span>
+                  <strong>Credit / Debit Card</strong>
+                  <small>Visa / Mastercard</small>
+                </div>
+              </label>
+            </div>
+
+            <!-- Payment Instructions Box -->
+            <div class="nn-payment-instructions" id="pay-instructions-easypaisa">
+              <div class="nn-inst-header">
+                <strong>EasyPaisa Instant Payment</strong>
+                <span class="nn-status-pill">Active</span>
+              </div>
+              <p>Send monthly payment via EasyPaisa to our official hosting merchant account:</p>
+              <div class="nn-pay-details-row">
+                <div><span>Account Title:</span> <strong>NOBLE NODE HOSTING</strong></div>
+                <div><span>EasyPaisa Number:</span> <strong>0345-9876543</strong></div>
+              </div>
+              <small>Your server is automatically activated immediately upon order submission. You can also upload your TxID in the dashboard.</small>
+            </div>
+
+            <div class="nn-payment-instructions" id="pay-instructions-jazzcash" hidden>
+              <div class="nn-inst-header">
+                <strong>JazzCash Direct Payment</strong>
+                <span class="nn-status-pill">Active</span>
+              </div>
+              <p>Send monthly payment via JazzCash mobile account:</p>
+              <div class="nn-pay-details-row">
+                <div><span>Account Title:</span> <strong>NOBLE NODE HOSTING</strong></div>
+                <div><span>JazzCash Number:</span> <strong>0300-1234567</strong></div>
+              </div>
+              <small>Instant activation. 24/7 payment confirmation via Discord or automated order verification.</small>
+            </div>
+
+            <div class="nn-payment-instructions" id="pay-instructions-sadapay" hidden>
+              <div class="nn-inst-header">
+                <strong>SadaPay / NayaPay / Raast Bank Transfer</strong>
+                <span class="nn-status-pill">Active</span>
+              </div>
+              <p>Transfer via Raast ID or IBAN from any Pakistani bank app with zero fees:</p>
+              <div class="nn-pay-details-row">
+                <div><span>Raast / Phone:</span> <strong>03459876543</strong></div>
+                <div><span>SadaPay IBAN:</span> <strong>PK00SADA0000012345678901</strong></div>
+              </div>
+            </div>
+
+            <div class="nn-payment-instructions" id="pay-instructions-card" hidden>
+              <div class="nn-inst-header">
+                <strong>Visa & Mastercard Secure Gateway</strong>
+                <span class="nn-status-pill">Active</span>
+              </div>
+              <p>Supports all Pakistani debit/credit cards with international and internet e-commerce enabled.</p>
+            </div>
+          </section>
+        </div>
+
+        <!-- Right: Order Summary Sticky -->
+        <aside class="nn-checkout-summary-col">
+          <div class="nn-card nn-order-summary-card">
+            <h3>Order Summary</h3>
+            <div class="nn-summary-plan" id="summary-plan-box">
+              <div>
+                <strong id="summary-plan-name">{{ selected_plan.name if selected_plan else '32GB RAM Plan' }}</strong>
+                <span id="summary-plan-specs">{{ (selected_plan.ram ~ ' · ' ~ selected_plan.cpu) if selected_plan else '32GB RAM · 8 vCores' }}</span>
+              </div>
+              <span class="nn-summary-tier-badge" id="summary-plan-category">{{ selected_plan.category|upper if selected_plan else 'FORGE' }}</span>
+            </div>
+
+            <div class="nn-coupon-box">
+              <label for="coupon-input">Promo Code / Coupon</label>
+              <div class="nn-coupon-input-group">
+                <input type="text" id="coupon-input" placeholder="e.g. PAKISTAN20">
+                <button type="button" class="nn-button nn-button-small" onclick="applyCheckoutCoupon()">Apply</button>
+              </div>
+              <p id="coupon-status-msg" class="nn-coupon-msg"></p>
+            </div>
+
+            <div class="nn-order-lines">
+              <div class="nn-line-item">
+                <span>Monthly Hosting Plan</span>
+                <strong id="line-base-price">PKR {{ "{:,}".format(selected_plan.pkr_price) if selected_plan and selected_plan.pkr_price else '8,200' }}</strong>
+              </div>
+              <div class="nn-line-item" id="discount-line-item" hidden>
+                <span>Promo Discount</span>
+                <strong id="line-discount-amount" class="nn-discount-text">-PKR 0</strong>
+              </div>
+              <div class="nn-line-item">
+                <span>12+ Tbps DDoS Mitigation</span>
+                <strong class="nn-free-text">FREE INCLUDED</strong>
+              </div>
+              <div class="nn-line-item">
+                <span>Automated Daily Backups</span>
+                <strong class="nn-free-text">FREE INCLUDED</strong>
+              </div>
+              <div class="nn-line-item">
+                <span>Free Subdomain</span>
+                <strong class="nn-free-text">FREE INCLUDED</strong>
+              </div>
+              <div class="nn-line-divider"></div>
+              <div class="nn-line-total">
+                <div>
+                  <strong>Total Due Today</strong>
+                  <small>Renews monthly · Cancel anytime</small>
+                </div>
+                <div class="nn-total-amount" id="line-total-price">
+                  PKR {{ "{:,}".format(selected_plan.pkr_price) if selected_plan and selected_plan.pkr_price else '8,200' }}
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" id="deploy-btn" class="nn-button nn-button-lime nn-button-block">
+              <span>Deploy Server Now</span>
+              <span aria-hidden="true">🚀</span>
+            </button>
+
+            <div class="nn-guarantees">
+              <div><i data-lucide="shield-check"></i> 12+ Tbps Path.net Protection</div>
+              <div><i data-lucide="zap"></i> Instant &lt;60s Deployment</div>
+              <div><i data-lucide="message-square"></i> 24/7 Discord Support (Urdu/Eng)</div>
+            </div>
+          </div>
+        </aside>
+      </form>
+    </div>
+  </main>
+
+  <!-- Modal for Order Success -->
+  <div class="nn-modal-backdrop" id="order-success-modal" hidden>
+    <div class="nn-modal-card">
+      <div class="nn-modal-icon">✅</div>
+      <h2>Server Successfully Provisioned!</h2>
+      <p>Your server is online and running on our low-latency Pakistani infrastructure.</p>
+      <div class="nn-provisioned-details">
+        <div><span>Order ID:</span> <strong id="modal-order-id">NN-PK-00000</strong></div>
+        <div><span>Server IP:</span> <strong id="modal-server-ip" class="nn-ip-highlight">pk-lahore.noblenode.host:25565</strong></div>
+        <div><span>Location:</span> <strong id="modal-location">Lahore, Pakistan</strong></div>
+        <div><span>Software:</span> <strong id="modal-software">Paper 1.21.4</strong></div>
+        <div><span>Total:</span> <strong id="modal-total">PKR 8,200</strong></div>
+      </div>
+      <div class="nn-modal-actions">
+        <a href="/dashboard" class="nn-button nn-button-lime nn-button-block">Go to Account Manager ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="nn-footer">
+    <a class="nn-brand" href="/" aria-label="Noble Node home">
+      <img src="/static/images/logo.png" alt="Noble Node" width="34" height="34" loading="lazy" decoding="async">
+      <span>NOBLE NODE</span>
+    </a>
+    <span>Minecraft server hosting · <a href="https://noblenode.host/">noblenode.host</a></span>
+    <nav aria-label="Footer navigation">
+      <a href="/plans">Plans</a>
+      <a href="/trusted-by">Trusted Servers</a>
+      <a href="/utilities">Tools</a>
+      <a href="/faq">FAQ</a>
+      <a href="https://discord.noblenode.host">Discord</a>
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+    </nav>
+    <span>© 2026 Noble Node</span>
+  </footer>
+
+  <script>
+    const plansData = {{ (plans|default([]))|tojson }};
+    let currentPlanId = "{{ selected_plan.id if selected_plan else 'world-32gb' }}";
+    let appliedCoupon = null;
+
+    function getPlan(id) {
+      return plansData.find(p => p.id === id) || plansData[0];
+    }
+
+    function updateSelectedPlanDetails(planId) {
+      currentPlanId = planId;
+      document.querySelectorAll('.nn-plan-option').forEach(el => {
+        const input = el.querySelector('input');
+        el.classList.toggle('selected', input.value === planId);
+      });
+      recalcTotal();
+    }
+
+    function togglePayDetails(method) {
+      document.querySelectorAll('.nn-payment-instructions').forEach(el => el.hidden = true);
+      document.getElementById('pay-instructions-' + method)?.removeAttribute('hidden');
+      document.querySelectorAll('.nn-pay-option').forEach(el => {
+        const input = el.querySelector('input');
+        el.classList.toggle('selected', input.value.toLowerCase().includes(method));
+      });
+    }
+
+    async function applyCheckoutCoupon() {
+      const code = document.getElementById('coupon-input').value.trim().toUpperCase();
+      const msg = document.getElementById('coupon-status-msg');
+      if (!code) {
+        msg.textContent = 'Please enter a coupon code.';
+        msg.className = 'nn-coupon-msg is-error';
+        return;
+      }
+      try {
+        const res = await fetch('/api/coupons/validate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code })
+        });
+        const data = await res.json();
+        if (data.success && data.coupon) {
+          appliedCoupon = data.coupon;
+          msg.textContent = `✓ Coupon Applied: ${data.coupon.description}`;
+          msg.className = 'nn-coupon-msg is-success';
+        } else {
+          appliedCoupon = null;
+          msg.textContent = '✕ ' + (data.message || 'Invalid or expired coupon');
+          msg.className = 'nn-coupon-msg is-error';
+        }
+      } catch (err) {
+        msg.textContent = 'Error verifying coupon.';
+        msg.className = 'nn-coupon-msg is-error';
+      }
+      recalcTotal();
+    }
+
+    function recalcTotal() {
+      const plan = getPlan(currentPlanId);
+      const basePrice = plan.pkr_price || 2200;
+      let discount = 0;
+
+      if (appliedCoupon) {
+        if (appliedCoupon.discount_pct > 0) {
+          discount = Math.floor(basePrice * (appliedCoupon.discount_pct / 100));
+        } else if (appliedCoupon.flat_pkr > 0) {
+          discount = Math.min(basePrice, appliedCoupon.flat_pkr);
+        }
+      }
+
+      const total = Math.max(0, basePrice - discount);
+
+      document.getElementById('summary-plan-name').textContent = plan.name;
+      document.getElementById('summary-plan-specs').textContent = `${plan.ram} · ${plan.cpu}`;
+      document.getElementById('summary-plan-category').textContent = (plan.category || 'SMP').toUpperCase();
+      document.getElementById('line-base-price').textContent = `PKR ${basePrice.toLocaleString()}`;
+
+      const discountLine = document.getElementById('discount-line-item');
+      if (discount > 0) {
+        discountLine.hidden = false;
+        document.getElementById('line-discount-amount').textContent = `-PKR ${discount.toLocaleString()}`;
+      } else {
+        discountLine.hidden = true;
+      }
+
+      document.getElementById('line-total-price').textContent = `PKR ${total.toLocaleString()}`;
+    }
+
+    async function submitCheckoutOrder(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = document.getElementById('deploy-btn');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<span>Provisioning Server...</span> <span>⏳</span>';
+      btn.disabled = true;
+
+      const payload = {
+        plan_id: currentPlanId,
+        server_name: form.server_name.value.trim(),
+        subdomain: form.subdomain.value.trim(),
+        location: form.location.value,
+        software: form.software.value,
+        payment_method: form.payment_method.value,
+        coupon_code: appliedCoupon ? appliedCoupon.code : ''
+      };
+
+      if (form.name) payload.name = form.name.value.trim();
+      if (form.email) payload.email = form.email.value.trim();
+      if (form.password) payload.password = form.password.value;
+
+      try {
+        const res = await fetch('/api/order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          throw new Error(data.message || 'Checkout failed.');
+        }
+
+        document.getElementById('modal-order-id').textContent = data.order_id || 'NN-PK-NEW';
+        document.getElementById('modal-server-ip').textContent = data.server_ip || 'pk-lahore.noblenode.host';
+        document.getElementById('modal-location').textContent = data.location || 'Lahore';
+        document.getElementById('modal-software').textContent = data.software || 'Paper 1.21.4';
+        document.getElementById('modal-total').textContent = `PKR ${data.total_pkr.toLocaleString()}`;
+        document.getElementById('order-success-modal').hidden = false;
+      } catch (err) {
+        alert(err.message || 'Unable to complete order. Please check all fields.');
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      recalcTotal();
+    });
+  </script>
+  <script src="/static/js/main.js?v=noble2"></script>
+</body>
+</html>

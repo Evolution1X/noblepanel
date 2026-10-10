@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Dashboard | Noble Node</title>
+  <meta name="description" content="Manage your Noble Node account.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" type="image/png" href="/static/images/logo.png">
+  <link rel="stylesheet" href="/static/css/style.css?v=5000">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body style="background: var(--bg-dark);">
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo">
+        <img src="/static/images/logo.png" alt="Noble Node" class="brand-logo-img">
+      </a>
+      <div class="nav-right-group">
+        <ul class="nav-links">
+          <li><a href="/utilities">Utilities</a></li>
+          <li><a href="/plans">Plans</a></li>
+          <li><a href="/status">Status</a></li>
+        </ul>
+        <button class="btn btn-outline" type="button" onclick="logoutClient()">Sign Out</button>
+      </div>
+    </div>
+  </nav>
+
+  <main style="padding-top: 120px; padding-bottom: 80px;">
+    <div class="container" style="max-width: 1100px;">
+      <div class="reveal">
+        <div class="tag-badge"><span class="tag-num">[ 01 ]</span> <span class="tag-dot"></span> CLIENT PORTAL</div>
+        <h1 style="font-size: clamp(2.3rem, 5vw, 3.5rem); margin-top: 1rem;">Welcome back, {{ user.name }}.</h1>
+      </div>
+
+      <div class="utility-grid" style="margin-top: 2rem;">
+        <div class="utility-card reveal reveal-delay-1">
+          <h3>Account</h3>
+          <div class="utility-output">Name: {{ user.name }}
+Email: {{ user.email }}</div>
+        </div>
+        <div class="utility-card reveal reveal-delay-2">
+          <h3>Server status</h3>
+          <div class="utility-output">Server status is not connected to live monitoring.
+No provisioned server records are available.</div>
+        </div>
+        <div class="utility-card reveal reveal-delay-3">
+          <h3>Next steps</h3>
+          <div class="utility-output">Online ordering is not connected yet.
+Browse current plans or contact support.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/static/js/main.js?v=5000"></script>
+  <script>
+    function logoutClient() {
+      fetch('/api/auth/logout', { method: 'POST' }).finally(() => {
+        window.location.href = '/signin';
+      });
+    }
+  </script>
+</body>
+</html>

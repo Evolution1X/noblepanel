@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Server Utilities | Noble Node</title>
+  <meta name="description" content="Use Noble Node server utilities for memory planning, startup command creation, and practical Minecraft hosting guidance.">
+  <link rel="canonical" href="https://noblenode.host/utilities">
+  <link rel="icon" type="image/png" href="/static/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="/static/css/style.css?v=5000">
+</head>
+<body style="background: var(--bg-dark);">
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo">
+        <img src="/static/images/logo.png" alt="Noble Node" class="brand-logo-img">
+      </a>
+      <div class="nav-right-group">
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/plans">Plans</a></li>
+          <li><a href="/status">Status</a></li>
+          <li><a href="/utilities" class="active">Utilities</a></li>
+          <li><a href="/faq">FAQ</a></li>
+        </ul>
+        <a href="/signin" class="btn btn-pill-white btn-sm">Sign In</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="padding-top: 120px; padding-bottom: 80px;">
+    <div class="container" style="max-width: 1200px;">
+      <div class="reveal" style="text-align: center; margin-bottom: 2rem;">
+        <div class="tag-badge"><span class="tag-num">[ 01 ]</span> <span class="tag-dot"></span> SERVER UTILITIES</div>
+        <h1 style="font-size: clamp(2.4rem, 6vw, 4rem); margin-top: 1rem;">Build smarter Minecraft servers.</h1>
+        <p style="max-width: 800px; margin: 1rem auto 0; color: var(--text-muted); font-size: 1.02rem;">Practical tools for planning memory, generating startup commands, and checking compatibility before you launch or upgrade.</p>
+      </div>
+
+      <div class="utility-grid">
+        <div class="utility-card reveal reveal-delay-1">
+          <h3>Memory planner</h3>
+          <p>Estimate how much memory your server should use based on player count and modded load.</p>
+          <label for="utility-players">Players</label>
+          <input id="utility-players" type="number" min="1" max="200" value="20">
+          <label for="utility-mode" style="display:block; margin-top:0.8rem;">Load profile</label>
+          <select id="utility-mode">
+            <option value="vanilla">Vanilla</option>
+            <option value="paper">Paper / Plugins</option>
+            <option value="modded">Forge / Fabric Modded</option>
+          </select>
+          <button class="btn btn-pill-white" type="button" onclick="estimateMemory()">Calculate</button>
+          <div id="memory-output" class="utility-output">Recommended memory: 4 GB</div>
+        </div>
+
+        <div class="utility-card reveal reveal-delay-2">
+          <h3>Startup command builder</h3>
+          <p>Generate a safe Java startup command for a typical server pool.</p>
+          <label for="utility-memory">Memory (GB)</label>
+          <input id="utility-memory" type="number" min="2" max="64" value="8">
+          <label for="utility-version" style="display:block; margin-top:0.8rem;">Java version</label>
+          <select id="utility-version">
+            <option value="17">Java 17</option>
+            <option value="21">Java 21</option>
+          </select>
+          <button class="btn btn-pill-white" type="button" onclick="buildStartCommand()">Generate</button>
+          <div id="command-output" class="utility-output">java -Xms4G -Xmx8G -jar paper.jar --nogui</div>
+        </div>
+
+        <div class="utility-card reveal reveal-delay-3">
+          <h3>Compatibility guide</h3>
+          <p>Check the best-fit server package for common Minecraft setups and resource needs.</p>
+          <div class="utility-output">Vanilla: Starter or Standard
+Paper: Standard or Pro
+Forge/Fabric: Pro or Enterprise
+Bedrock: Pro + Geyser support</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom" style="border-top: 1px solid var(--border-muted); padding-top: 1.25rem; margin-top: 2rem;">
+        <div>© 2026 Noble Node (Private) Limited. Crafted in Pakistan</div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <i data-lucide="shield-check"></i>
+          <span>Plan details should be confirmed before purchase.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/js/main.js?v=5000"></script>
+  <script>
+    function estimateMemory() {
+      const players = Number(document.getElementById('utility-players').value || 20);
+      const mode = document.getElementById('utility-mode').value;
+      let memory = 4;
+      if (mode === 'vanilla') memory = Math.max(2, Math.ceil(players / 10) * 2);
+      if (mode === 'paper') memory = Math.max(4, Math.ceil(players / 6) * 2);
+      if (mode === 'modded') memory = Math.max(6, Math.ceil(players / 4) * 2 + 2);
+      document.getElementById('memory-output').textContent = `Recommended memory: ${memory} GB`;
+    }
+
+    function buildStartCommand() {
+      const memory = Number(document.getElementById('utility-memory').value || 8);
+      const version = document.getElementById('utility-version').value;
+      const command = `java -Xms${Math.max(2, Math.round(memory * 0.5))}G -Xmx${memory}G -jar paper.jar --nogui`;
+      document.getElementById('command-output').textContent = `${command}  # Java ${version}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      estimateMemory();
+      buildStartCommand();
+      refreshLucideIcons();
+    });
+  </script>
+</body>
+</html>

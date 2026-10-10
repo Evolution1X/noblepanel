@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service | Noble Node</title>
+  <meta name="description" content="Noble Node terms covering account use, service availability, and plan information.">
+  <link rel="canonical" href="https://noblenode.host/terms">
+  
+  <link rel="icon" type="image/png" href="/static/images/logo.png">
+  
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  
+  <link rel="stylesheet" href="/static/css/style.css?v=5000">
+</head>
+<body>
+
+
+  
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo" id="brand-logo">
+        <img src="/static/images/logo.png" alt="Noble Node" class="brand-logo-img">
+      </a>
+
+      <div class="nav-right-group">
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/plans">Plans</a></li>
+          <li><a href="/status">Status</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          
+          <li class="nav-dropdown active">
+            <a href="#" class="dropdown-trigger" onclick="event.preventDefault()">
+              Legal <i data-lucide="chevron-down" class="dropdown-icon"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="/terms" class="dropdown-item active"><i data-lucide="file-text"></i> Terms of Service</a>
+              <a href="/privacy" class="dropdown-item"><i data-lucide="shield-check"></i> Privacy Policy</a>
+            </div>
+          </li>
+        </ul>
+
+        <div class="toggle-switch" id="theme-toggle-switch">
+          <label class="switch-label">
+            <input type="checkbox" class="checkbox" id="theme-checkbox" onchange="toggleTheme()">
+            <span class="slider">
+              <svg class="slider-icon sun-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              <svg class="slider-icon moon-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </span>
+          </label>
+        </div>
+
+        <a href="/signin" class="btn btn-pill-white btn-sm">Sign In</a>
+
+        
+        <button class="hamburger-btn" id="hamburger-btn" onclick="openMobileMenu()">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  
+  <div class="mobile-menu-overlay" id="mobile-menu">
+    <button class="mobile-close" onclick="closeMobileMenu()">
+      <i data-lucide="x"></i>
+    </button>
+    <a href="/" onclick="closeMobileMenu()">Home</a>
+    <a href="/plans" onclick="closeMobileMenu()">Plans</a>
+    <a href="/status" onclick="closeMobileMenu()">System Status</a>
+    <a href="/faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="/signin" onclick="closeMobileMenu()">Sign In</a>
+    <a href="/signup" onclick="closeMobileMenu()">Sign Up</a>
+    
+    <div class="mobile-dropdown-group">
+      <span class="mobile-group-title">Legal & Policies</span>
+      <a href="/terms" onclick="closeMobileMenu()"><i data-lucide="file-text"></i> Terms of Service</a>
+      <a href="/privacy" onclick="closeMobileMenu()"><i data-lucide="shield-check"></i> Privacy Policy</a>
+    </div>
+
+    
+  </div>
+
+  
+  <section class="hero-section" style="padding-top: 9.5rem; padding-bottom: 3.5rem;">
+    <div class="container hero-center-container">
+      
+      <div class="tag-badge" style="margin-bottom: 1rem;"><span class="tag-num">[ 01 ]</span> <span class="tag-dot"></span> LEGAL AGREEMENT</div>
+
+      <h1 class="hero-minekeep-title" style="font-size: 3.6rem; margin-bottom: 1rem;">
+        Terms of <span class="gradient-pakistani">Service</span>
+      </h1>
+
+      <p class="hero-minekeep-subtitle" style="margin-bottom: 1.5rem;">
+        Last updated: October 2026. Please review our service terms, acceptable use policy, and billing conditions.
+      </p>
+
+    </div>
+  </section>
+
+  
+  <section class="minekeep-section" style="border-top: none; padding-top: 1rem;">
+    <div class="container" style="max-width: 860px;">
+      
+      <div class="mk-card" style="padding: 3rem 2.5rem; line-height: 1.8;">
+        
+        <h2 style="font-size: 1.6rem; margin-bottom: 1rem; color: #FFFFFF;">1. Acceptance of Terms</h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">
+          By provisioning or renewing a server with Noble Node (Private) Limited, you agree to comply with and be bound by these Terms of Service. If you do not agree with any part of these terms, you must not use our hosting platform or automated provisioning tools.
+        </p>
+
+        <h2 style="font-size: 1.6rem; margin-bottom: 1rem; color: #FFFFFF;">2. Service Availability</h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">
+          Online checkout, server provisioning, and live infrastructure monitoring are not currently connected through this website. Plan information is for comparison and does not represent an active service order or uptime guarantee. Contact Noble Node support to confirm availability before making a purchase.
+        </p>
+
+        <h2 style="font-size: 1.6rem; margin-bottom: 1rem; color: #FFFFFF;">3. Payments & Currency Billing</h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">
+          The plan page lists PKR and USD reference prices. No payment processor is connected to this website, and no payment method should be considered available until confirmed directly by Noble Node.
+        </p>
+
+        <h2 style="font-size: 1.6rem; margin-bottom: 1rem; color: #FFFFFF;">4. Acceptable Use Policy (AUP)</h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">
+          If hosting services are made available, they must be used lawfully and must not be used for malicious activity, unauthorized access, or network abuse.
+        </p>
+
+        <h2 style="font-size: 1.6rem; margin-bottom: 1rem; color: #FFFFFF;">5. Automated Backups & Data Integrity</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+          Backup quantities shown on plans describe the listed plan data. Backup scheduling, retrieval, and restoration are not managed by this website and must be confirmed before purchase.
+        </p>
+
+      </div>
+
+    </div>
+  </section>
+
+  
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="brand-logo">
+            <img src="/static/images/logo.png" alt="Noble Node" class="brand-logo-img">
+          </a>
+          <p>Minecraft server hosting plans with clearly listed resources and monthly pricing.</p>
+          <div class="footer-socials">
+            <a href="#" title="Discord"><i data-lucide="message-square"></i></a>
+            <a href="#" title="Twitter / X"><i data-lucide="twitter"></i></a>
+            <a href="#" title="YouTube"><i data-lucide="youtube"></i></a>
+            <a href="#" title="Email"><i data-lucide="mail"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Hosting Solutions</h4>
+          <ul>
+            <li><a href="/plans">Minecraft Java Edition</a></li>
+            <li><a href="/plans">Minecraft Bedrock Edition</a></li>
+            <li><a href="/plans">Forge & Fabric Modpacks</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Datacenters & Status</h4>
+          <ul>
+            <li><a href="/status">System Status Page</a></li>
+            <li><a href="/plans#nodes">Lahore Datacenter</a></li>
+            <li><a href="/plans#nodes">Karachi Datacenter</a></li>
+            <li><a href="/plans#nodes">Dubai Datacenter</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Support & Account</h4>
+          <ul>
+            <li><a href="/signin">Sign In</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+            <li><a href="/faq">FAQ Support</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Noble Node (Private) Limited. Crafted in Pakistan</div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <i data-lucide="shield-check"></i>
+          <span>Plan details should be confirmed before purchase.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/js/main.js?v=5000"></script>
+</body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Noble Node | Ultra-Low Latency Pakistani Minecraft Server Hosting</title>
+  <meta name="description" content="Deploy ultra-low latency Minecraft servers in Pakistan with AMD Ryzen 9 9950X CPUs, Karachi & Lahore nodes, 12+ Tbps DDoS protection, and instant EasyPaisa & JazzCash checkout.">
+  <meta name="keywords" content="Minecraft hosting Pakistan, low latency Minecraft server, EasyPaisa Minecraft, JazzCash Minecraft hosting, Ryzen 9 9950X server, DDoS protected Minecraft hosting Pakistan">
+  <link rel="canonical" href="https://noblenode.host/">
+  <meta property="og:title" content="Noble Node | Low-Latency Pakistani Minecraft Server Hosting">
+  <meta property="og:description" content="Deploy Ryzen 9 9950X Minecraft servers in Karachi and Lahore. 12+ Tbps DDoS protection and local PKR payments via EasyPaisa and JazzCash.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://noblenode.host/">
+  <meta property="og:site_name" content="Noble Node">
+  <meta property="og:image" content="https://noblenode.host/static/images/logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#10241e">
+  <link rel="icon" type="image/png" href="/static/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/noble.css?v=2">
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Noble Node",
+    "url": "https://noblenode.host/",
+    "logo": "https://noblenode.host/static/images/logo.png",
+    "description": "High-performance Minecraft server hosting with Lahore and Karachi datacenter locations, Ryzen 9 CPUs, and enterprise DDoS protection.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Customer Support",
+      "availableLanguage": ["English", "Urdu"]
+    }
+  }
+  </script>
+</head>
+<body class="noble-site">
+  <div class="nn-nav-space" aria-hidden="true"></div>
+  <header class="nn-nav" id="navbar">
+    <div class="nn-nav-inner">
+      <a class="nn-brand" href="/" aria-label="Noble Node home">
+        <img src="/static/images/logo.png" alt="Noble Node" width="34" height="34" loading="lazy" decoding="async">
+        <span>NOBLE NODE</span>
+      </a>
+      <nav class="nn-nav-links" aria-label="Main navigation">
+        <a href="#plans">Plans</a>
+        <a href="/plans#compare">Plan Comparer</a>
+        <a href="/trusted-by">Trusted Servers</a>
+        <a href="#network">Fast Network</a>
+        <a href="#ddos">DDoS Defense</a>
+        <a href="#partners">Partners</a>
+        <a href="/utilities">Tools</a>
+        <a href="/faq">FAQ</a>
+        <a href="https://discord.noblenode.host">Discord</a>
+      </nav>
+      <div class="nn-nav-actions">
+        {% if current_user %}
+        <a class="nn-login-link" href="/dashboard">Dashboard</a>
+        <a class="nn-login-link nn-logout-btn" href="/logout">Sign out</a>
+        {% else %}
+        <a class="nn-login-link" href="/auth?mode=signin">Sign in</a>
+        <a class="nn-button nn-button-small" href="/checkout">Build your world <span aria-hidden="true">↗</span></a>
+        {% endif %}
+        <button class="nn-menu-button" type="button" id="hamburger-btn" aria-label="Open menu" onclick="openMobileMenu()"><i data-lucide="menu"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nn-mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+    <button class="nn-mobile-close" type="button" aria-label="Close menu" onclick="closeMobileMenu()"><i data-lucide="x"></i></button>
+    <a href="#plans" onclick="closeMobileMenu()">Plans</a>
+    <a href="/plans#compare" onclick="closeMobileMenu()">Plan Comparer</a>
+    <a href="/trusted-by" onclick="closeMobileMenu()">Trusted Servers</a>
+    <a href="#network" onclick="closeMobileMenu()">Fast Network</a>
+    <a href="#ddos" onclick="closeMobileMenu()">DDoS Defense</a>
+    <a href="#partners" onclick="closeMobileMenu()">Partners</a>
+    <a href="/utilities" onclick="closeMobileMenu()">Server tools</a>
+    <a href="/faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="https://discord.noblenode.host" onclick="closeMobileMenu()">Join Discord</a>
+    {% if current_user %}
+    <a href="/dashboard" onclick="closeMobileMenu()">Dashboard</a>
+    <a href="/logout" onclick="closeMobileMenu()">Sign out</a>
+    {% else %}
+    <a href="/auth?mode=signin" onclick="closeMobileMenu()">Sign in</a>
+    <a class="nn-button" href="/checkout" onclick="closeMobileMenu()">Create account <span aria-hidden="true">↗</span></a>
+    {% endif %}
+  </div>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="nn-hero">
+      <div class="nn-hero-grid" aria-hidden="true"></div>
+      <div class="nn-hero-inner">
+        <div class="nn-hero-copy">
+          <p class="nn-eyebrow"><span class="nn-live-dot"></span> ULTRA-LOW LATENCY PAKISTANI MINECRAFT HOSTING</p>
+          <h1>Blazing fast Minecraft.<br><span>5ms ping. Real Ryzen 9 power.</span></h1>
+          <p class="nn-hero-lede">
+            Experience silky-smooth 20 TPS with flagship AMD Ryzen 9 9950X / 7950X3D processors and Gen4 NVMe storage. Native Karachi and Lahore nodes connect directly to Nayatel, PTCL, StormFiber, and Transworld for unbeatable local ping. Protected by 12+ Tbps always-on DDoS scrubbing with instant EasyPaisa & JazzCash checkout.
+          </p>
+          <div class="nn-hero-actions">
+            <a class="nn-button nn-button-lime" href="#plans">Explore PKR Plans <span aria-hidden="true">↓</span></a>
+            <a class="nn-button nn-button-dark" href="/checkout">Deploy in 60s <span aria-hidden="true">🚀</span></a>
+            <a class="nn-text-link" href="/trusted-by">View Trusted Servers <span aria-hidden="true">↗</span></a>
+          </div>
+          <p class="nn-hero-note">Native Pakistani Nodes · Karachi + Lahore · EasyPaisa & JazzCash Supported</p>
+        </div>
+
+        <div class="nn-pakistan-panel" aria-label="Noble Node Pakistan server locations and included protection">
+          <div class="nn-world-topline"><span>PAKISTAN / SERVER LOCATIONS</span><span class="nn-world-index">NN—PK</span></div>
+          <div class="nn-pakistan-map" aria-hidden="true">
+            <span class="nn-map-line"></span>
+            <span class="nn-map-node nn-map-karachi"></span>
+            <span class="nn-map-node nn-map-lahore"></span>
+            <span class="nn-map-label nn-label-karachi">KARACHI (5-9ms)</span>
+            <span class="nn-map-label nn-label-lahore">LAHORE (8-12ms)</span>
+          </div>
+          <div class="nn-pakistan-locations">
+            <div><span class="nn-live-dot"></span><strong>Karachi</strong><small>SOUTH PK NODE · 5ms</small></div>
+            <div><span class="nn-live-dot"></span><strong>Lahore</strong><small>CENTRAL PK NODE · 8ms</small></div>
+          </div>
+          <div class="nn-ddos-included">
+            <i data-lucide="shield-check" aria-hidden="true"></i>
+            <div>
+              <strong>12+ Tbps Corero & Path.net Protection</strong>
+              <span>Zero lag spikes, always-on inline scrubbing</span>
+            </div>
+          </div>
+          <p class="nn-node-note">Sub-15ms latency across Pakistan on Nayatel, StormFiber, PTCL, and 4G networks.</p>
+        </div>
+      </div>
+
+      <div class="nn-proof-strip" id="home-proof-strip" aria-live="polite">
+        <div><strong>8–64 GB</strong><span>DDR5 6000MHz Tiers</span></div>
+        <div><strong>Ryzen 9 9950X</strong><span>Up to 5.7 GHz Clocks</span></div>
+        <div><strong>Gen4 NVMe</strong><span>7,000+ MB/s R/W Storage</span></div>
+        <div><strong>12+ Tbps</strong><span>Layer 7 Game Shield</span></div>
+      </div>
+      <div class="nn-hero-index" aria-hidden="true"><span>01</span><span class="nn-index-rule"></span><span>NOBLE NODE HOSTING</span></div>
+    </section>
+
+    <!-- FAST NETWORKING & PING TESTER (NEW SECTION) -->
+    <section class="nn-network-section" id="network">
+      <div class="nn-network-container">
+        <div class="nn-section-head">
+          <div>
+            <p class="nn-eyebrow nn-eyebrow-dark"><span class="nn-live-dot"></span> TIER-1 REGIONAL INFRASTRUCTURE</p>
+            <h2>Unmatched Fast Networking across Pakistan.</h2>
+          </div>
+          <p>Directly peered with Pakistan’s primary Internet Service Providers for lowest round-trip times and zero jitter.</p>
+        </div>
+
+        <div class="nn-network-grid">
+          <!-- ISP Latency Table -->
+          <div class="nn-network-card">
+            <h3>Direct National Peering</h3>
+            <p>Our nodes in Lahore and Karachi connect straight to domestic transit exchange points:</p>
+            <div class="nn-isp-list">
+              <div class="nn-isp-row">
+                <span class="nn-isp-name"><strong>Nayatel Fiber</strong> Islamabad / Rawalpindi / Faisalabad</span>
+                <span class="nn-isp-ping">6 – 10 ms</span>
+              </div>
+              <div class="nn-isp-row">
+                <span class="nn-isp-name"><strong>StormFiber</strong> Karachi / Lahore / Peshawar</span>
+                <span class="nn-isp-ping">5 – 12 ms</span>
+              </div>
+              <div class="nn-isp-row">
+                <span class="nn-isp-name"><strong>PTCL Flash Fiber</strong> Nationwide Broadband</span>
+                <span class="nn-isp-ping">8 – 15 ms</span>
+              </div>
+              <div class="nn-isp-row">
+                <span class="nn-isp-name"><strong>Transworld Home</strong> Karachi / Lahore</span>
+                <span class="nn-isp-ping">7 – 14 ms</span>
+              </div>
+              <div class="nn-isp-row">
+                <span class="nn-isp-name"><strong>Jazz & Zong 4G</strong> Mobile Players</span>
+                <span class="nn-isp-ping">15 – 25 ms</span>
+              </div>
+            </div>
+            <div class="nn-network-stat-foot">
+              <div><strong>10 Gbps</strong><span>Redundant Node Uplinks</span></div>
+              <div><strong>99.98%</strong><span>Network Uptime Guarantee</span></div>
+            </div>
+          </div>
+
+          <!-- Interactive Latency Test Widget -->
+          <div class="nn-network-card nn-ping-widget">
+            <h3>Test Your Estimated Latency</h3>
+            <p>Select your city and node to simulate live latency to Noble Node:</p>
+            <div class="nn-ping-form">
+              <div class="nn-ping-field">
+                <label for="ping-city">Your City in Pakistan</label>
+                <select id="ping-city" onchange="runLivePing()">
+                  <option value="Lahore">Lahore</option>
+                  <option value="Karachi">Karachi</option>
+                  <option value="Islamabad">Islamabad / Rawalpindi</option>
+                  <option value="Faisalabad">Faisalabad</option>
+                  <option value="Multan">Multan</option>
+                  <option value="Peshawar">Peshawar</option>
+                  <option value="Quetta">Quetta</option>
+                </select>
+              </div>
+              <div class="nn-ping-field">
+                <label for="ping-target-node">Target Hosting Node</label>
+                <select id="ping-target-node" onchange="runLivePing()">
+                  <option value="lahore">Lahore Node (Central PK)</option>
+                  <option value="karachi">Karachi Node (South PK)</option>
+                  <option value="dubai">Dubai, UAE Node</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="nn-ping-display">
+              <div class="nn-ping-meter">
+                <span class="nn-ping-num" id="live-ping-val">7</span>
+                <span class="nn-ping-unit">ms</span>
+              </div>
+              <div class="nn-ping-quality" id="live-ping-quality">
+                <span class="nn-live-dot"></span> Excellent Ping (Competitive Grade)
+              </div>
+            </div>
+            <p class="nn-ping-note">Simulated round-trip time based on domestic BGP routing. No VPN required.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DDOS PROTECTION SHOWCASE (NEW SECTION) -->
+    <section class="nn-ddos-showcase-section" id="ddos">
+      <div class="nn-ddos-showcase-inner">
+        <div class="nn-section-head">
+          <div>
+            <p class="nn-eyebrow nn-eyebrow-dark"><span class="nn-shield-pulse">🛡️</span> 12+ TBPS CAPACITY</p>
+            <h2>Enterprise DDoS Protection on Every Plan.</h2>
+          </div>
+          <p>Never worry about salty rivals booting your Minecraft server offline again. Always-on, automated, sub-millisecond game protection.</p>
+        </div>
+
+        <div class="nn-ddos-features-grid">
+          <div class="nn-ddos-feat-card">
+            <span class="nn-feat-icon">⚡</span>
+            <h3>Sub-1ms Mitigation Time</h3>
+            <p>Inline hardware filtering scrubbers identify and drop malicious packets before they ever touch your Minecraft process. No lag spikes, no disconnected players.</p>
+          </div>
+          <div class="nn-ddos-feat-card">
+            <span class="nn-feat-icon">🎮</span>
+            <h3>Minecraft Layer 7 Game Shield</h3>
+            <p>Filters attack patterns tailored to Minecraft: Botnet login floods, Null Ping queries, BungeeCord exploits, TCP handshake exhaustion, and server list spam.</p>
+          </div>
+          <div class="nn-ddos-feat-card">
+            <span class="nn-feat-icon">🌐</span>
+            <h3>Path.net & Corero Edge Scrubbing</h3>
+            <p>12+ Tbps global scrubbing capacity absorbs volumetric UDP amplification attacks (NTP, DNS, Memcached, SNMP) thousands of gigabits larger than any local network.</p>
+          </div>
+          <div class="nn-ddos-feat-card">
+            <span class="nn-feat-icon">💎</span>
+            <h3>100% Free on Every Tier</h3>
+            <p>Zero hidden charges or "Anti-DDoS Addons". Whether you are on our 8GB starter tier or a 64GB network node, you get the exact same multi-terabit armor.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANS SECTION (PKR PLANS) -->
+    <section class="nn-plans-section" id="plans">
+      <div class="nn-section-head">
+        <div>
+          <p class="nn-eyebrow nn-eyebrow-dark">TRANSPARENT LOCAL PRICING</p>
+          <h2>Pick your server size in PKR.</h2>
+        </div>
+        <p>No dollar conversion surprises. Clear monthly pricing in Pakistani Rupees with EasyPaisa, JazzCash & Raast support.</p>
+      </div>
+
+      <div class="nn-pricing-grid" id="home-pricing-grid" aria-live="polite">
+        {% for plan in plans|default([]) %}
+        <article class="nn-plan nn-plan-{{ loop.index }} {% if plan.recommended %}nn-plan-featured{% endif %}">
+          {% if plan.badge %}<div class="nn-plan-label">{{ plan.badge }}</div>{% endif %}
+          <h3>{{ plan.ram }}</h3>
+          <ul class="nn-plan-specs">
+            <li><i data-lucide="cpu" aria-hidden="true"></i><span>{{ plan.cpu }}</span></li>
+            <li><i data-lucide="hard-drive" aria-hidden="true"></i><span>{{ plan.storage }}</span></li>
+            <li><i data-lucide="archive" aria-hidden="true"></i><span>{{ plan.backups }}</span></li>
+            <li><i data-lucide="users" aria-hidden="true"></i><span>{{ plan.slots }}</span></li>
+          </ul>
+          <div class="nn-plan-protection">
+            <i data-lucide="shield-check" aria-hidden="true"></i>
+            <span>{{ plan.ddos_protection }}</span>
+          </div>
+          <div class="nn-plan-price-row">
+            <p class="nn-plan-price">
+              <span>PKR</span> {{ "{:,}".format(plan.pkr_price) if plan.pkr_price else "2,200" }}
+            </p>
+            <p class="nn-plan-period">/ month (~${{ "%.2f"|format(plan.usd_price) }})</p>
+          </div>
+          <a class="nn-plan-action" href="/checkout?plan={{ plan.id }}">
+            Configure & Deploy <span aria-hidden="true">🚀</span>
+          </a>
+        </article>
+        {% endfor %}
+      </div>
+
+      <div class="nn-pricing-foot">
+        <span>Instant setup in under 60 seconds. Local EasyPaisa & JazzCash accepted.</span>
+        <a href="/plans#compare">Compare all plan specs in our Plan Comparer Matrix <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <!-- TRUSTED SERVERS PREVIEW SECTION -->
+    <section class="nn-trusted-preview-section">
+      <div class="nn-trusted-preview-inner">
+        <div class="nn-section-head">
+          <div>
+            <p class="nn-eyebrow nn-eyebrow-dark">VERIFIED NETWORKS</p>
+            <h2>Trusted by Pakistan’s Top Minecraft Servers.</h2>
+          </div>
+          <p>Join hundreds of server owners who run their worlds on Noble Node.</p>
+        </div>
+
+        <div class="nn-servers-grid">
+          {% for server in (trusted_servers|default([]))[:3] %}
+          <article class="nn-server-card">
+            <div class="nn-server-top">
+              <div class="nn-server-identity">
+                <span class="nn-server-icon">{{ server.name[:2]|upper }}</span>
+                <div>
+                  <h3>{{ server.name }}</h3>
+                  <span class="nn-server-status"><span class="nn-live-dot"></span> {{ server.status }} · {{ server.players }}</span>
+                </div>
+              </div>
+              <span class="nn-verified-badge"><i data-lucide="check-circle"></i> Verified</span>
+            </div>
+            <p class="nn-server-gamemode">{{ server.gamemode }}</p>
+            <div class="nn-server-meta">
+              <div><span>Location:</span> <strong>{{ server.location }}</strong></div>
+              <div><span>Plan:</span> <strong>{{ server.plan }}</strong></div>
+            </div>
+            {% if server.quote %}
+            <blockquote class="nn-server-quote">"{{ server.quote }}"</blockquote>
+            {% endif %}
+          </article>
+          {% endfor %}
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+          <a class="nn-button nn-button-lime" href="/trusted-by">View All Trusted Servers & IPs <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION (NEW SECTION) -->
+    <section class="nn-testimonials-section" id="testimonials">
+      <div class="nn-testimonials-inner">
+        <div class="nn-section-head">
+          <div>
+            <p class="nn-eyebrow nn-eyebrow-dark">COMMUNITY VOICES</p>
+            <h2>What Pakistani Server Owners Say</h2>
+          </div>
+          <p>Authentic reviews from server owners, admins, and network developers.</p>
+        </div>
+
+        <div class="nn-testimonials-grid" id="testimonials-grid">
+          {% for t in testimonials|default([]) %}
+          <div class="nn-testimonial-card">
+            <div class="nn-t-stars">★★★★★</div>
+            <p class="nn-t-quote">"{{ t.text }}"</p>
+            <div class="nn-t-author">
+              <div class="nn-t-avatar">{{ t.avatar }}</div>
+              <div>
+                <strong>{{ t.name }}</strong>
+                <small>{{ t.role }}</small>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- PARTNERS SECTION (NEW SECTION) -->
+    <section class="nn-partners-section" id="partners">
+      <div class="nn-partners-inner">
+        <div class="nn-section-head">
+          <div>
+            <p class="nn-eyebrow nn-eyebrow-dark">ECOSYSTEM & HARDWARE</p>
+            <h2>Official Technology & Payment Partners</h2>
+          </div>
+          <p>We work with enterprise industry leaders to bring modern hosting to Pakistan.</p>
+        </div>
+
+        <div class="nn-partners-grid">
+          {% for p in partners|default([]) %}
+          <div class="nn-partner-card">
+            <div class="nn-partner-top">
+              <span class="nn-partner-category">{{ p.category }}</span>
+            </div>
+            <h3>{{ p.name }}</h3>
+            <p>{{ p.description }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTTOM CTA -->
+    <section class="nn-bottom-cta">
+      <div>
+        <p class="nn-eyebrow nn-eyebrow-dark">INSTANT DEPLOYMENT</p>
+        <h2>Your next world is 60 seconds away.</h2>
+      </div>
+      <a class="nn-button nn-button-lime" href="/checkout">Deploy in Pakistan Now <span aria-hidden="true">🚀</span></a>
+      <span class="nn-cta-stamp" aria-hidden="true">NN</span>
+    </section>
+  </main>
+
+  <footer class="nn-footer">
+    <a class="nn-brand" href="/" aria-label="Noble Node home">
+      <img src="/static/images/logo.png" alt="Noble Node" width="34" height="34" loading="lazy" decoding="async">
+      <span>NOBLE NODE</span>
+    </a>
+    <span>Minecraft server hosting · <a href="https://noblenode.host/">noblenode.host</a></span>
+    <nav aria-label="Footer navigation">
+      <a href="/plans">Plans</a>
+      <a href="/plans#compare">Plan Comparer</a>
+      <a href="/trusted-by">Trusted Servers</a>
+      <a href="/checkout">Deploy Server</a>
+      <a href="/utilities">Tools</a>
+      <a href="/faq">FAQ</a>
+      <a href="https://discord.noblenode.host">Discord</a>
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+    </nav>
+    <span>© 2026 Noble Node (Private) Limited. Crafted for Pakistan.</span>
+  </footer>
+
+  <script>
+    function runLivePing() {
+      const city = document.getElementById('ping-city').value;
+      const node = document.getElementById('ping-target-node').value;
+      const valEl = document.getElementById('live-ping-val');
+      const qualityEl = document.getElementById('live-ping-quality');
+
+      let ping = 8;
+      if (node === 'lahore') {
+        if (city === 'Lahore') ping = 6;
+        else if (city.includes('Islamabad')) ping = 11;
+        else if (city === 'Faisalabad') ping = 9;
+        else if (city === 'Karachi') ping = 18;
+        else ping = 14;
+      } else if (node === 'karachi') {
+        if (city === 'Karachi') ping = 5;
+        else if (city === 'Lahore') ping = 17;
+        else ping = 20;
+      } else {
+        ping = 34;
+      }
+
+      valEl.textContent = ping;
+      if (ping <= 12) {
+        qualityEl.innerHTML = '<span class="nn-live-dot"></span> Excellent Ping (Competitive Grade)';
+      } else if (ping <= 25) {
+        qualityEl.innerHTML = '<span class="nn-live-dot"></span> Great Ping (Smooth 20 TPS Gameplay)';
+      } else {
+        qualityEl.innerHTML = '<span class="nn-live-dot"></span> Stable Regional Routing';
+      }
+    }
+  </script>
+  <script src="/static/js/main.js?v=noble2"></script>
+</body>
+</html>

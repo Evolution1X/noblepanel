@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#0b1217">
+  <title>Restricted console access | Noble Node</title>
+  <link rel="icon" type="image/png" href="/static/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/noble.css?v=1">
+  <link rel="stylesheet" href="/static/css/noble-admin.css?v=1">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="nn-admin-login-page">
+  <section class="nn-admin-login-visual">
+    <a class="nn-brand" href="/" aria-label="Noble Node home"><img src="/static/images/logo.png" alt=""><span>NOBLE NODE</span></a>
+    <div class="nn-admin-login-message"><p class="nn-admin-login-label">PRIVATE CONSOLE / STAFF ONLY</p><h1>Keep the<br><span>worlds running.</span></h1><p>Manage Noble Node plans and content from the private operations console.</p></div>
+    <div class="nn-admin-login-foot">NOBLE NODE / INTERNAL ACCESS</div>
+  </section>
+  <main class="nn-admin-login-form-side">
+    <section class="nn-admin-login-card">
+      <p class="nn-admin-login-label">AUTHENTICATED SESSION REQUIRED</p>
+      <h2>Console sign in</h2>
+      <p>Use the administrator credentials configured for this deployment.</p>
+      <form id="login-form" onsubmit="handleLogin(event)">
+        <label for="admin-username">Username</label>
+        <input type="text" id="admin-username" autocomplete="username" required>
+        <label for="admin-password">Password</label>
+        <input type="password" id="admin-password" autocomplete="current-password" required>
+        <div class="nn-admin-login-error" id="login-error" role="alert" hidden></div>
+        <button type="submit" class="nn-button nn-admin-login-submit"><span>Unlock console</span><span aria-hidden="true">↗</span></button>
+      </form>
+      <a class="nn-admin-login-back" href="/">← Return to Noble Node</a>
+    </section>
+  </main>
+  <script>
+    async function handleLogin(event) {
+      event.preventDefault();
+      const button = event.currentTarget.querySelector('button[type="submit"]');
+      const error = document.getElementById('login-error');
+      error.hidden = true;
+      button.disabled = true;
+      button.querySelector('span:first-child').textContent = 'Checking…';
+      try {
+        const response = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: document.getElementById('admin-username').value.trim(),
+            password: document.getElementById('admin-password').value
+          })
+        });
+        const result = await response.json();
+        if (!response.ok || !result.success) throw new Error(result.message || 'Sign in failed.');
+        window.location.assign('{{ admin_url }}');
+      } catch (failure) {
+        error.textContent = failure.message || 'Unable to sign in.';
+        error.hidden = false;
+      } finally {
+        button.disabled = false;
+        button.querySelector('span:first-child').textContent = 'Unlock console';
+      }
+    }
+  </script>
+</body>
+</html>

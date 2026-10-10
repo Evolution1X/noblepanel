@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Account Manager & Server Dashboard | Noble Node</title>
+  <meta name="description" content="Manage your Noble Node Minecraft servers, view live performance stats, renew plans in PKR, and configure account security.">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#10241e">
+  <link rel="icon" type="image/png" href="/static/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/noble.css?v=2">
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+</head>
+<body class="noble-site nn-dashboard-page">
+  <div class="nn-nav-space" aria-hidden="true"></div>
+  <header class="nn-nav" id="navbar">
+    <div class="nn-nav-inner">
+      <a class="nn-brand" href="/" aria-label="Noble Node home">
+        <img src="/static/images/logo.png" alt="Noble Node" width="34" height="34" loading="lazy" decoding="async">
+        <span>NOBLE NODE</span>
+      </a>
+      <nav class="nn-nav-links" aria-label="Main navigation">
+        <a href="/plans">Plans</a>
+        <a href="/trusted-by">Trusted Servers</a>
+        <a href="/utilities">Tools</a>
+        <a href="/faq">FAQ</a>
+        <a href="https://discord.noblenode.host">Discord</a>
+      </nav>
+      <div class="nn-nav-actions">
+        <a class="nn-button nn-button-small nn-button-lime" href="/checkout">Deploy Server 🚀</a>
+        <a class="nn-login-link nn-logout-btn" href="/logout" onclick="logoutClient(event)">Sign out</a>
+        <button class="nn-menu-button" type="button" id="hamburger-btn" aria-label="Open menu" onclick="openMobileMenu()"><i data-lucide="menu"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nn-mobile-menu" id="mobile-menu" aria-label="Account navigation">
+    <button class="nn-mobile-close" type="button" aria-label="Close menu" onclick="closeMobileMenu()"><i data-lucide="x"></i></button>
+    <a href="/plans" onclick="closeMobileMenu()">Plans</a>
+    <a href="/trusted-by" onclick="closeMobileMenu()">Trusted Servers</a>
+    <a href="/utilities" onclick="closeMobileMenu()">Tools</a>
+    <a href="/checkout" onclick="closeMobileMenu()">Deploy Server</a>
+    <a href="/faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="https://discord.noblenode.host" onclick="closeMobileMenu()">Discord</a>
+    <a href="/logout" class="nn-mobile-signout" onclick="logoutClient(event)">Sign out</a>
+  </div>
+
+  <main class="nn-dashboard-main">
+    <!-- Header -->
+    <header class="nn-dashboard-heading">
+      <div>
+        <p class="nn-eyebrow nn-eyebrow-dark"><span class="nn-live-dot"></span> PLAYER ACCOUNT MANAGER</p>
+        <h1>Welcome, <span id="display-user-name">{{ user.name }}</span></h1>
+        <p>{{ user.email }} · Account ID: #{{ user.id }}</p>
+      </div>
+      <div class="nn-dashboard-header-actions">
+        <a href="/checkout" class="nn-button nn-button-lime">Deploy New Server 🚀</a>
+        <a href="/logout" class="nn-button nn-button-dark nn-logout-btn" onclick="logoutClient(event)">Sign out</a>
+      </div>
+    </header>
+
+    <!-- Account Manager Tabs Navigation -->
+    <div class="nn-mgr-tabs">
+      <button class="nn-mgr-tab-btn active" onclick="switchMgrTab('servers')">
+        <i data-lucide="server"></i> My Servers ({{ servers|length }})
+      </button>
+      <button class="nn-mgr-tab-btn" onclick="switchMgrTab('billing')">
+        <i data-lucide="credit-card"></i> Invoices & Orders ({{ orders|length }})
+      </button>
+      <button class="nn-mgr-tab-btn" onclick="switchMgrTab('security')">
+        <i data-lucide="shield"></i> Account & Security
+      </button>
+    </div>
+
+    <!-- TAB 1: SERVER MANAGER -->
+    <section class="nn-mgr-tab-content active" id="tab-servers">
+      {% if servers %}
+        {% for server in servers %}
+        <div class="nn-server-manager-card" id="server-card-{{ server.id }}">
+          <div class="nn-server-mgr-head">
+            <div class="nn-server-title-group">
+              <span class="nn-server-avatar">MC</span>
+              <div>
+                <h2>{{ server.name }}</h2>
+                <div class="nn-server-address-badge">
+                  <span>{{ server.ip }}</span>
+                  <button type="button" class="nn-mini-copy-btn" onclick="copyText('{{ server.ip }}', this)">Copy IP</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Server Power Controls -->
+            <div class="nn-server-controls">
+              <span class="nn-server-status-pill status-{{ server.status|lower }}" id="status-pill-{{ server.id }}">
+                <span class="nn-status-dot"></span> {{ server.status }}
+              </span>
+              <button class="nn-power-btn btn-restart" onclick="triggerServerAction('{{ server.id }}', 'restart', this)">
+                <i data-lucide="refresh-cw"></i> Restart
+              </button>
+              <button class="nn-power-btn btn-stop" onclick="triggerServerAction('{{ server.id }}', 'stop', this)">
+                <i data-lucide="square"></i> Stop
+              </button>
+              <button class="nn-power-btn btn-start" onclick="triggerServerAction('{{ server.id }}', 'start', this)">
+                <i data-lucide="play"></i> Start
+              </button>
+            </div>
+          </div>
+
+          <!-- Live Performance Grid -->
+          <div class="nn-server-metrics-grid">
+            <div class="nn-metric-box">
+              <div class="nn-metric-title">
+                <span>DDR5 RAM Usage</span>
+                <strong id="mem-val-{{ server.id }}">{{ server.memory_used_mb }} MB / {{ server.memory_total_mb }} MB</strong>
+              </div>
+              <div class="nn-progress-bar">
+                <div class="nn-progress-fill" style="width: {{ (server.memory_used_mb / server.memory_total_mb * 100)|round }}%;"></div>
+              </div>
+            </div>
+
+            <div class="nn-metric-box">
+              <div class="nn-metric-title">
+                <span>Ryzen 9 CPU Load</span>
+                <strong id="cpu-val-{{ server.id }}">{{ server.cpu_usage_pct }}%</strong>
+              </div>
+              <div class="nn-progress-bar">
+                <div class="nn-progress-fill" style="width: {{ server.cpu_usage_pct * 2 }}%;"></div>
+              </div>
+            </div>
+
+            <div class="nn-metric-box">
+              <div class="nn-metric-title">
+                <span>Gen4 NVMe Disk</span>
+                <strong>{{ server.disk_used_gb }} GB / {{ server.disk_total_gb }} GB</strong>
+              </div>
+              <div class="nn-progress-bar">
+                <div class="nn-progress-fill" style="width: {{ (server.disk_used_gb / server.disk_total_gb * 100)|round }}%;"></div>
+              </div>
+            </div>
+
+            <div class="nn-metric-box nn-metric-highlight">
+              <div class="nn-metric-title">
+                <span>Game TPS & Online</span>
+                <strong>20.0 TPS · {{ server.players }}</strong>
+              </div>
+              <small class="nn-metric-note">{{ server.location }} · 12+ Tbps DDoS Active</small>
+            </div>
+          </div>
+
+          <!-- Quick SFTP & Web Console -->
+          <div class="nn-server-lower-grid">
+            <!-- Web Console Preview -->
+            <div class="nn-console-preview-box">
+              <div class="nn-console-head">
+                <span><i data-lucide="terminal"></i> Server Console Logs (Paper 1.21.4)</span>
+                <span class="nn-live-dot"></span>
+              </div>
+              <pre class="nn-console-output" id="console-{{ server.id }}">[Server thread/INFO]: Starting minecraft server version 1.21.4
+[Server thread/INFO]: Loading properties
+[Server thread/INFO]: Default game type: SURVIVAL
+[Server thread/INFO]: Generating keypair
+[Server thread/INFO]: Starting Minecraft server on *:25565
+[Server thread/INFO]: [Geyser-Spigot] Loaded Geyser version 2.4.0
+[Server thread/INFO]: Preparing level "world"
+[Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[Server thread/INFO]: Time elapsed: 1420 ms
+[Server thread/INFO]: Done (2.140s)! For help, type "help"
+[Server thread/INFO]: Running on AMD Ryzen 9 9950X / Gen4 NVMe (Lahore Node)
+[Server thread/INFO]: TPS: 20.0 (Memory: {{ server.memory_used_mb }}MB / {{ server.memory_total_mb }}MB)</pre>
+            </div>
+
+            <!-- Credentials & Subscription -->
+            <div class="nn-server-creds-box">
+              <h3>Connection & Access</h3>
+              <div class="nn-cred-line">
+                <span>Server Subdomain:</span>
+                <strong>{{ server.subdomain }}</strong>
+              </div>
+              <div class="nn-cred-line">
+                <span>Direct Node Address:</span>
+                <strong>{{ server.ip }}</strong>
+              </div>
+              <div class="nn-cred-line">
+                <span>SFTP File Host:</span>
+                <code>sftp://{{ server.location|lower|replace(' ', '') }}.noblenode.host:2022</code>
+              </div>
+              <div class="nn-cred-line">
+                <span>Monthly Rate:</span>
+                <strong>PKR {{ "{:,}".format(server.monthly_pkr) }} / month</strong>
+              </div>
+              <div class="nn-cred-line">
+                <span>Renewal Date:</span>
+                <span>{{ server.renewal_date }}</span>
+              </div>
+              <div class="nn-creds-actions">
+                <a href="/checkout?plan={{ server.plan_id }}" class="nn-button nn-button-small nn-button-lime">Renew / Upgrade Plan ↗</a>
+                <button type="button" class="nn-button nn-button-small nn-button-dark" onclick="alert('SFTP password is your account password.')">View SFTP Password</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <!-- Empty State -->
+        <div class="nn-card nn-dashboard-empty">
+          <div class="nn-empty-icon">🎮</div>
+          <h2>No Active Servers Found</h2>
+          <p>You haven’t deployed a server yet. Deploy a high-speed Ryzen 9 server in Pakistan with instant setup!</p>
+          <a class="nn-button nn-button-lime" href="/checkout">Deploy Your First Server (From PKR 2,200) 🚀</a>
+        </div>
+      {% endif %}
+    </section>
+
+    <!-- TAB 2: INVOICES & ORDERS -->
+    <section class="nn-mgr-tab-content" id="tab-billing" hidden>
+      <div class="nn-card nn-billing-card">
+        <div class="nn-section-head">
+          <div>
+            <h2>Order & Invoice History</h2>
+            <p>Download receipts and view active Pakistani payments.</p>
+          </div>
+          <a href="/checkout" class="nn-button nn-button-small nn-button-lime">New Order ↗</a>
+        </div>
+
+        {% if orders %}
+        <div class="nn-table-responsive">
+          <table class="nn-dashboard-table">
+            <thead>
+              <tr>
+                <th>Invoice / Order ID</th>
+                <th>Plan Name</th>
+                <th>Amount (PKR)</th>
+                <th>Payment Method</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in orders %}
+              <tr>
+                <td><strong>{{ order.id }}</strong></td>
+                <td>{{ order.plan_name }}</td>
+                <td><strong>PKR {{ "{:,}".format(order.total_pkr) }}</strong></td>
+                <td>{{ order.payment_method }}</td>
+                <td>{{ order.created_at }}</td>
+                <td><span class="nn-status-pill status-paid">Paid</span></td>
+                <td>
+                  <button type="button" class="nn-mini-action-btn" onclick="alert('Invoice {{ order.id }} verified. Status: Paid.')">View Receipt</button>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <p class="nn-empty-text">No order history available yet.</p>
+        {% endif %}
+      </div>
+    </section>
+
+    <!-- TAB 3: ACCOUNT & SECURITY -->
+    <section class="nn-mgr-tab-content" id="tab-security" hidden>
+      <div class="nn-security-grid">
+        <!-- Edit Profile -->
+        <div class="nn-card nn-profile-card">
+          <h2>Update Profile</h2>
+          <form onsubmit="handleUpdateProfile(event)">
+            <div class="nn-field">
+              <label for="prof-name">Full Name</label>
+              <input type="text" id="prof-name" name="name" value="{{ user.name }}" required>
+            </div>
+            <div class="nn-field">
+              <label for="prof-email">Email Address</label>
+              <input type="email" id="prof-email" value="{{ user.email }}" disabled>
+              <small class="nn-field-hint">Email address cannot be modified once verified.</small>
+            </div>
+            <button type="submit" class="nn-button nn-button-lime" id="prof-save-btn">Save Changes</button>
+            <p id="prof-status" class="nn-coupon-msg"></p>
+          </form>
+        </div>
+
+        <!-- Change Password -->
+        <div class="nn-card nn-password-card">
+          <h2>Change Password</h2>
+          <form onsubmit="handleChangePassword(event)">
+            <div class="nn-field">
+              <label for="curr-pass">Current Password</label>
+              <input type="password" id="curr-pass" name="current_password" required>
+            </div>
+            <div class="nn-field">
+              <label for="new-pass">New Password (min 8 chars)</label>
+              <input type="password" id="new-pass" name="new_password" minlength="8" required>
+            </div>
+            <button type="submit" class="nn-button nn-button-dark" id="pass-save-btn">Update Password</button>
+            <p id="pass-status" class="nn-coupon-msg"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="nn-footer">
+    <a class="nn-brand" href="/" aria-label="Noble Node home">
+      <img src="/static/images/logo.png" alt="Noble Node" width="34" height="34" loading="lazy" decoding="async">
+      <span>NOBLE NODE</span>
+    </a>
+    <span>Account Manager · <a href="https://noblenode.host/">noblenode.host</a></span>
+    <nav aria-label="Footer navigation">
+      <a href="/plans">Plans</a>
+      <a href="/trusted-by">Trusted Servers</a>
+      <a href="/faq">FAQ</a>
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+    </nav>
+    <span>© 2026 Noble Node</span>
+  </footer>
+
+  <script>
+    function switchMgrTab(tabId) {
+      document.querySelectorAll('.nn-mgr-tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.nn-mgr-tab-content').forEach(c => c.hidden = true);
+
+      event.currentTarget.classList.add('active');
+      const target = document.getElementById('tab-' + tabId);
+      if (target) target.hidden = false;
+    }
+
+    function copyText(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = orig, 2000);
+      });
+    }
+
+    function logoutClient(e) {
+      if (e) e.preventDefault();
+      fetch('/api/auth/logout', { method: 'POST' })
+        .catch(() => {})
+        .finally(() => {
+          window.location.href = '/logout';
+        });
+    }
+
+    async function triggerServerAction(serverId, action, btn) {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(`/api/user/servers/${serverId}/action`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action })
+        });
+        const data = await res.json();
+        if (data.success && data.server) {
+          const statusPill = document.getElementById('status-pill-' + serverId);
+          if (statusPill) {
+            statusPill.className = `nn-server-status-pill status-${data.server.status.toLowerCase()}`;
+            statusPill.innerHTML = `<span class="nn-status-dot"></span> ${data.server.status}`;
+          }
+          const consoleEl = document.getElementById('console-' + serverId);
+          if (consoleEl) {
+            consoleEl.textContent += `\n[Server thread/INFO]: Power state changed to ${data.server.status.toUpperCase()} by user`;
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+          }
+        } else {
+          alert(data.message || 'Action failed.');
+        }
+      } catch (err) {
+        alert('Could not send power action.');
+      } finally {
+        btn.innerHTML = orig;
+        btn.disabled = false;
+      }
+    }
+
+    async function handleUpdateProfile(e) {
+      e.preventDefault();
+      const name = e.target.name.value.trim();
+      const status = document.getElementById('prof-status');
+      status.textContent = 'Saving...';
+      status.className = 'nn-coupon-msg';
+
+      try {
+        const res = await fetch('/api/user/profile', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name })
+        });
+        const data = await res.json();
+        if (data.success) {
+          status.textContent = '✓ Profile updated successfully!';
+          status.className = 'nn-coupon-msg is-success';
+          document.getElementById('display-user-name').textContent = name;
+        } else {
+          status.textContent = '✕ ' + (data.message || 'Failed to update profile.');
+          status.className = 'nn-coupon-msg is-error';
+        }
+      } catch (err) {
+        status.textContent = '✕ Network error.';
+        status.className = 'nn-coupon-msg is-error';
+      }
+    }
+
+    async function handleChangePassword(e) {
+      e.preventDefault();
+      const current_password = e.target.current_password.value;
+      const new_password = e.target.new_password.value;
+      const status = document.getElementById('pass-status');
+      status.textContent = 'Updating...';
+      status.className = 'nn-coupon-msg';
+
+      try {
+        const res = await fetch('/api/user/change-password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ current_password, new_password })
+        });
+        const data = await res.json();
+        if (data.success) {
+          status.textContent = '✓ Password updated successfully!';
+          status.className = 'nn-coupon-msg is-success';
+          e.target.reset();
+        } else {
+          status.textContent = '✕ ' + (data.message || 'Failed to change password.');
+          status.className = 'nn-coupon-msg is-error';
+        }
+      } catch (err) {
+        status.textContent = '✕ Network error.';
+        status.className = 'nn-coupon-msg is-error';
+      }
+    }
+  </script>
+  <script src="/static/js/main.js?v=noble2"></script>
+</body>
+</html>

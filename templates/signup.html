@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account | Noble Node Client Portal</title>
+  <meta name="description" content="Create a Noble Node account to access Minecraft hosting plan details and account features.">
+  
+  <link rel="icon" type="image/png" href="/static/images/logo.png">
+  <link rel="canonical" href="https://noblenode.host/signup">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <link rel="stylesheet" href="/static/css/style.css?v=5000">
+</head>
+<body style="min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; background-color: var(--bg-dark);">
+
+  
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo">
+        <img src="/static/images/logo.png" alt="Noble Node" class="brand-logo-img">
+      </a>
+
+      <div class="nav-right-group">
+        <a href="/" class="nav-link-btn" style="color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem;">
+          ← Back to Home
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  
+  <main style="padding-top: 130px; padding-bottom: 60px; display: flex; align-items: center; justify-content: center; flex: 1;">
+    <div class="container" style="max-width: 480px;">
+      
+      <div class="auth-card" style="background: var(--bg-card); border: 1px solid var(--border-bright); border-radius: 24px; padding: 2.5rem; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);">
+        
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <div class="auth-logo-badge" style="width: 56px; height: 56px; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem auto;">
+            <i data-lucide="user-plus" style="width: 26px; height: 26px; color: var(--primary-accent);"></i>
+          </div>
+          <h1 style="font-size: 1.75rem; font-family: var(--font-heading); color: #FFFFFF; margin-bottom: 0.35rem;">Create Your Account</h1>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Deploy low-latency Minecraft servers in seconds.</p>
+        </div>
+
+        <form onsubmit="handleClientSignUp(event)">
+          <div class="form-group" style="margin-bottom: 1.25rem;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem;">
+              <i data-lucide="user"></i> Full Name
+            </label>
+            <input type="text" class="form-control" name="name" placeholder="Ahmed Hassan" required style="width: 100%; padding: 0.85rem 1rem; background: var(--bg-card-alt); border: 1px solid var(--border-muted); border-radius: 12px; color: #FFFFFF; font-size: 0.95rem;">
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.25rem;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem;">
+              <i data-lucide="mail"></i> Email Address
+            </label>
+            <input type="email" class="form-control" name="email" placeholder="client@noblenode.host" required style="width: 100%; padding: 0.85rem 1rem; background: var(--bg-card-alt); border: 1px solid var(--border-muted); border-radius: 12px; color: #FFFFFF; font-size: 0.95rem;">
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <label style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">
+                <i data-lucide="lock"></i> Password
+              </label>
+              <button type="button" data-toggle-password="sign-up-password" style="font-size: 0.8rem; color: var(--primary-accent); text-decoration: none; border: none; background: transparent; cursor: pointer;">Show</button>
+            </div>
+            <input id="sign-up-password" type="password" class="form-control" name="password" placeholder="••••••••••••" required style="width: 100%; padding: 0.85rem 1rem; background: var(--bg-card-alt); border: 1px solid var(--border-muted); border-radius: 12px; color: #FFFFFF; font-size: 0.95rem;">
+          </div>
+
+          <button type="submit" class="btn btn-pill-white rocket-hover" style="width: 100%; padding: 0.9rem; font-size: 1rem; border-radius: 12px; justify-content: center; margin-bottom: 1.5rem;">
+            <i data-lucide="rocket"></i> Create Account & Continue
+          </button>
+        </form>
+
+        <div style="text-align: center; border-top: 1px solid var(--border-muted); padding-top: 1.25rem; font-size: 0.9rem; color: var(--text-muted);">
+          Already have an account? 
+          <a href="/signin" style="color: #FFFFFF; font-weight: 700; text-decoration: none; margin-left: 0.25rem;">Sign In</a>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  
+  <footer style="padding: 1.5rem 0;">
+    <div class="container" style="text-align: center; font-size: 0.82rem; color: var(--text-dim);">
+      © 2026 Noble Node (Private) Limited. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="/static/js/main.js?v=4000"></script>
+</body>
+</html>

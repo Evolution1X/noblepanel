@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ERROR {{ error_code|default(404) }} | Noble Node</title>
+  
+  <link rel="icon" type="image/png" href="/static/images/logo.png">
+  
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  
+  <link rel="stylesheet" href="/static/css/style.css?v=5000">
+</head>
+<body>
+
+  
+  <div class="custom-cursor-dot" id="cursor-dot"></div>
+  <div class="custom-cursor-ring" id="cursor-ring"></div>
+
+  
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo" id="brand-logo">
+        <img src="/static/images/logo.png" alt="Noble Node" class="brand-logo-img">
+      </a>
+
+      <div class="nav-right-group">
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/plans">Plans</a></li>
+          <li><a href="/status">Status</a></li>
+          <li><a href="/faq">FAQ</a></li>
+        </ul>
+
+        <a href="/signin" class="btn btn-pill-white btn-sm">Sign In</a>
+      </div>
+    </div>
+  </nav>
+
+  
+  <section class="hero-section" style="padding-top: 11rem; padding-bottom: 7rem;">
+    <div class="container" style="display: flex; justify-content: center;">
+      
+      <div style="width: 100%; max-width: 520px; text-align: center;">
+        <div style="background-color: var(--bg-card); border: 1px solid var(--border-bright); border-radius: var(--radius-lg); padding: 3rem 2rem; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);">
+          
+          <div style="font-family: var(--font-mono); font-weight: 800; font-size: 0.9rem; color: var(--text-dim); letter-spacing: 0.15em; margin-bottom: 0.6rem; text-transform: uppercase;">
+            ERROR {{ error_code|default(404) }}
+          </div>
+
+          <h1 style="font-size: 2.3rem; font-weight: 800; font-family: var(--font-heading); margin-bottom: 0.75rem; text-transform: lowercase; color: #FFFFFF;">
+            {{ error_title|default('route not found') }}
+          </h1>
+
+          <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2.25rem; max-width: 400px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+            {{ error_message|default("This page doesn't exist, or it may have moved.") }}
+          </p>
+
+          <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+            <a href="/" class="btn btn-pill-white btn-md" style="padding: 0.75rem 1.4rem;">
+              <i data-lucide="home"></i> Return Home
+            </a>
+            <a href="/status" class="btn btn-outline btn-md" style="padding: 0.75rem 1.4rem;">
+              <i data-lucide="activity"></i> System Status
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  
+  <footer>
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none;">
+        <div>© 2026 Noble Node (Private) Limited. Crafted in Pakistan</div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <i data-lucide="shield-check"></i>
+          <span>Plan details should be confirmed before purchase.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  
+  <script src="/static/js/main.js?v=5000"></script>
+</body>
+</html>

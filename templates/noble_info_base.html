@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page_title }} | Noble Node</title>
+  <meta name="description" content="{{ page_description }}">
+  <link rel="canonical" href="https://noblenode.host/{{ page_slug }}">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#10241e">
+  <meta property="og:title" content="{{ page_title }} | Noble Node">
+  <meta property="og:description" content="{{ page_description }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://noblenode.host/{{ page_slug }}">
+  <meta property="og:site_name" content="Noble Node">
+  <link rel="icon" type="image/png" href="/static/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/noble.css?v=2">
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+</head>
+<body class="noble-site">
+  <div class="nn-nav-space" aria-hidden="true"></div>
+  <header class="nn-nav" id="navbar">
+    <div class="nn-nav-inner">
+      <a class="nn-brand" href="/" aria-label="Noble Node home">
+        <img src="/static/images/logo.png" alt="Noble Node" width="34" height="34" loading="lazy" decoding="async">
+        <span>NOBLE NODE</span>
+      </a>
+      <nav class="nn-nav-links" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/plans">Plans</a>
+        <a href="/plans#compare">Plan Comparer</a>
+        <a href="/trusted-by">Trusted Servers</a>
+        <a href="/utilities" {% if page_slug == 'utilities' %}aria-current="page"{% endif %}>Tools</a>
+        <a href="/faq" {% if page_slug == 'faq' %}aria-current="page"{% endif %}>FAQ</a>
+        <a href="https://discord.noblenode.host">Discord</a>
+      </nav>
+      <div class="nn-nav-actions">
+        {% if current_user %}
+        <a class="nn-login-link" href="/dashboard">Dashboard</a>
+        <a class="nn-login-link nn-logout-btn" href="/logout">Sign out</a>
+        {% else %}
+        <a class="nn-login-link" href="/auth?mode=signin">Sign in</a>
+        <a class="nn-button nn-button-small" href="/checkout">Build your world <span aria-hidden="true">↗</span></a>
+        {% endif %}
+        <button class="nn-menu-button" type="button" id="hamburger-btn" aria-label="Open menu" onclick="openMobileMenu()"><i data-lucide="menu"></i></button>
+      </div>
+    </div>
+  </header>
+  <div class="nn-mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+    <button class="nn-mobile-close" type="button" aria-label="Close menu" onclick="closeMobileMenu()"><i data-lucide="x"></i></button>
+    <a href="/" onclick="closeMobileMenu()">Home</a>
+    <a href="/plans" onclick="closeMobileMenu()">Plans</a>
+    <a href="/plans#compare" onclick="closeMobileMenu()">Plan Comparer</a>
+    <a href="/trusted-by" onclick="closeMobileMenu()">Trusted Servers</a>
+    <a href="/utilities" onclick="closeMobileMenu()">Server tools</a>
+    <a href="/faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="https://discord.noblenode.host" onclick="closeMobileMenu()">Join Discord</a>
+    {% if current_user %}
+    <a href="/dashboard" onclick="closeMobileMenu()">Dashboard</a>
+    <a href="/logout" onclick="closeMobileMenu()">Sign out</a>
+    {% else %}
+    <a href="/auth?mode=signin" onclick="closeMobileMenu()">Sign in</a>
+    <a class="nn-button" href="/checkout" onclick="closeMobileMenu()">Create account <span aria-hidden="true">↗</span></a>
+    {% endif %}
+  </div>
+  <main class="nn-info-page">
+    <header class="nn-info-heading">
+      <p class="nn-eyebrow nn-eyebrow-dark">{{ page_eyebrow }}</p>
+      <h1>{{ page_title }}</h1>
+      <p>{{ page_description }}</p>
+    </header>
+    <section class="nn-info-content">
+      {% block info_content %}{% endblock %}
+    </section>
+  </main>
+  <footer class="nn-footer">
+    <a class="nn-brand" href="/" aria-label="Noble Node home">
+      <img src="/static/images/logo.png" alt="Noble Node" width="34" height="34" loading="lazy" decoding="async">
+      <span>NOBLE NODE</span>
+    </a>
+    <span>Minecraft server plans · <a href="https://noblenode.host/">noblenode.host</a></span>
+    <nav aria-label="Footer navigation">
+      <a href="/plans">Plans</a>
+      <a href="/trusted-by">Trusted Servers</a>
+      <a href="/checkout">Deploy</a>
+      <a href="/utilities">Tools</a>
+      <a href="/faq">FAQ</a>
+      <a href="https://discord.noblenode.host">Discord</a>
+    </nav>
+    <span>© 2026 Noble Node</span>
+  </footer>
+  <aside class="nn-cookie-banner" id="nn-cookie-banner" role="region" aria-label="Cookie notice" hidden><div><strong>Only essential cookies.</strong><p>Noble Node uses an essential session cookie for account security. We do not use advertising or analytics cookies.</p></div><a href="/privacy">Privacy</a><button type="button" id="nn-cookie-accept">Continue</button></aside>
+  <script src="/static/js/main.js?v=noble2"></script>
+</body>
+</html>

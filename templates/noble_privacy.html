@@ -1,0 +1,15 @@
+{% extends "noble_info_base.html" %}
+{% set page_title = "Privacy, plainly" %}
+{% set page_description = "How Noble Node handles account information, authentication sessions, password reset requests, and configured sign-in providers." %}
+{% set page_eyebrow = "YOUR DATA, EXPLAINED" %}
+{% set page_slug = "privacy" %}
+{% block info_content %}
+  <div class="nn-legal-intro"><span class="nn-legal-stamp">NN / PRIVACY</span><p>Effective October 2026. This notice describes the data used by this website and the choices available to account holders.</p></div>
+  <div class="nn-legal-list">
+    <article><span>01</span><div><h2>Account information</h2><p>Email/password accounts store a name, email address, and a salted password hash. Federated accounts store the provider name and stable provider subject identifier required to recognize the account.</p></div></article>
+    <article><span>02</span><div><h2>Sessions and cookies</h2><p>The site uses a signed, HTTP-only session cookie for account and administrator sessions. In production, configure HTTPS and secure cookies. Session data is used to keep you signed in and is not an advertising identifier.</p></div></article>
+    <article><span>03</span><div><h2>Password reset</h2><p>When SMTP is configured, a reset request creates a single-use token that expires after 30 minutes. Only a hash of the token is stored. The token is removed after use or delivery failure; reset email delivery is handled by the configured mail provider.</p></div></article>
+    <article><span>04</span><div><h2>Google and Microsoft sign-in</h2><p>If configured and selected, the chosen provider receives an authentication request. The app validates the OpenID Connect response and stores the provider subject. It does not automatically connect accounts by email alone.</p></div></article>
+    <article><span>05</span><div><h2>Storage and contact</h2><p>Account records are stored in the application data file. Payment references, game-server files, and player connection data are not collected by this website because payment, provisioning, and game proxy integrations are not connected.</p></div></article>
+  </div>
+{% endblock %}

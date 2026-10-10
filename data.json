@@ -1,0 +1,401 @@
+{
+  "plans": [
+    {
+      "id": "world-8gb",
+      "name": "8GB RAM",
+      "ram": "8GB DDR5",
+      "cpu": "4 vCores - Ryzen 9 9950X / 7950X3D",
+      "storage": "120GB NVMe Gen4 Storage",
+      "backups": "3 Daily Automated Backups",
+      "slots": "Unlimited Player Slots",
+      "pkr_price": 2200,
+      "usd_price": 7.95,
+      "recommended": false,
+      "badge": "STARTER SMP",
+      "icon": "box",
+      "category": "paper",
+      "ideal_for": "Small SMPs, vanilla worlds & friend groups (1-20 players)",
+      "ddos_protection": "Free 12+ Tbps Path.net & Corero DDoS Protection",
+      "port_speed": "10 Gbps Redundant Uplink",
+      "mysql": "Free MySQL Database Included",
+      "subdomain": "Free .noblenode.host Subdomain"
+    },
+    {
+      "id": "world-16gb",
+      "name": "16GB RAM",
+      "ram": "16GB DDR5",
+      "cpu": "6 vCores - Ryzen 9 9950X / 7950X3D",
+      "storage": "240GB NVMe Gen4 Storage",
+      "backups": "5 Daily Automated Backups",
+      "slots": "Unlimited Player Slots",
+      "pkr_price": 4400,
+      "usd_price": 15.95,
+      "recommended": false,
+      "badge": "CLOSE FRIENDS + MODS",
+      "icon": "shield",
+      "category": "paper",
+      "ideal_for": "Medium communities, modded SMPs & plugin-heavy servers (20-50 players)",
+      "ddos_protection": "Free 12+ Tbps Path.net & Corero DDoS Protection",
+      "port_speed": "10 Gbps Redundant Uplink",
+      "mysql": "Free MySQL Database Included",
+      "subdomain": "Free .noblenode.host Subdomain"
+    },
+    {
+      "id": "world-32gb",
+      "name": "32GB RAM",
+      "ram": "32GB DDR5",
+      "cpu": "8 vCores - Ryzen 9 9950X / 7950X3D",
+      "storage": "480GB NVMe Gen4 Storage",
+      "backups": "10 Daily Automated Backups",
+      "slots": "Unlimited Player Slots",
+      "pkr_price": 8200,
+      "usd_price": 29.95,
+      "recommended": true,
+      "badge": "COMMUNITY + HEAVY MODS",
+      "icon": "gem",
+      "category": "forge",
+      "ideal_for": "Large communities, heavy Forge/Fabric modpacks & public networks (50-150 players)",
+      "ddos_protection": "Free 12+ Tbps Path.net & Corero DDoS Protection",
+      "port_speed": "10 Gbps Redundant Uplink",
+      "mysql": "Free MySQL Database Included",
+      "subdomain": "Free .noblenode.host Subdomain"
+    },
+    {
+      "id": "world-64gb",
+      "name": "64GB RAM",
+      "ram": "64GB DDR5",
+      "cpu": "8 vCores - Ryzen 9 9950X / 7950X3D",
+      "storage": "960GB NVMe Gen4 Storage",
+      "backups": "Unlimited Daily Automated Backups",
+      "slots": "Unlimited Player Slots",
+      "pkr_price": 16500,
+      "usd_price": 59.95,
+      "recommended": false,
+      "badge": "ENTERPRISE NETWORK",
+      "icon": "award",
+      "category": "bedrock",
+      "ideal_for": "Multi-server BungeeCord/Velocity networks, massive world seeds & esports (150+ players)",
+      "ddos_protection": "Free 12+ Tbps Path.net & Corero DDoS Protection",
+      "port_speed": "10 Gbps Redundant Uplink",
+      "mysql": "Free MySQL Database Included",
+      "subdomain": "Free .noblenode.host Subdomain"
+    }
+  ],
+  "coupons": [
+    {
+      "code": "PAKISTAN20",
+      "discount_pct": 20,
+      "flat_pkr": 0,
+      "active": true,
+      "description": "20% Off Independence Discount on all server plans"
+    },
+    {
+      "code": "NOBLE10",
+      "discount_pct": 10,
+      "flat_pkr": 0,
+      "active": true,
+      "description": "10% Off Welcome Deal for new server hosts"
+    },
+    {
+      "code": "SAVE500",
+      "discount_pct": 0,
+      "flat_pkr": 500,
+      "active": true,
+      "description": "Flat 500 PKR Instant Discount on any package"
+    }
+  ],
+  "faqs": [
+    {
+      "id": 1,
+      "question": "How fast is my Minecraft server deployed after payment?",
+      "answer": "Instant deployment. Your server is automatically provisioned and ready in under 60 seconds the moment your payment is confirmed. You receive an email and dashboard notification with your IP address, SFTP credentials, and Noble Panel login."
+    },
+    {
+      "id": 2,
+      "question": "What payment methods do you accept in Pakistan?",
+      "answer": "We support all major Pakistani payment channels: EasyPaisa (Instant wallet & QR), JazzCash (Direct transfer & Till ID), SadaPay, NayaPay, Raast / Pakistani Bank Transfers (1Link), as well as international Visa, Mastercard, and Crypto (USDT, BTC, LTC)."
+    },
+    {
+      "id": 3,
+      "question": "Where are your servers located and what ping can I expect?",
+      "answer": "Our flagship nodes are stationed in Karachi and Lahore, Pakistan, directly peered with Tier-1 national backbones including Nayatel, PTCL, StormFiber, Transworld, Jazz, and Zong. Players in Pakistan experience ping as low as 5ms to 18ms. We also operate global POPs in Dubai (30ms), Singapore (55ms), and Frankfurt (110ms)."
+    },
+    {
+      "id": 4,
+      "question": "What DDoS protection is included with my server?",
+      "answer": "Every Noble Node server includes enterprise-grade 12+ Tbps Corero and Path.net DDoS protection at zero additional cost. Our always-on inline scrubbing filters Layer 3, Layer 4, and Layer 7 Minecraft-specific game attacks (Botnets, Null Ping, Handshake Floods, UDP Amplification) with sub-millisecond reaction time and zero server disconnects."
+    },
+    {
+      "id": 5,
+      "question": "Can Minecraft Bedrock (Mobile, Xbox, PS5, Switch) players join my Java server?",
+      "answer": "Yes! We offer pre-configured GeyserMC and Floodgate cross-play on all Paper and Purpur tiers. Bedrock edition players on Android, iOS, Windows 10/11, PlayStation, Xbox, and Nintendo Switch can join your Java world seamlessly on the same IP and port."
+    },
+    {
+      "id": 6,
+      "question": "Can I change my server version or install custom modpacks?",
+      "answer": "Absolutely. Noble Panel includes a 1-click modpack and version installer with full support for Paper, Purpur, Fabric, Forge, NeoForge, Spigot, BungeeCord, and Velocity. You can install thousands of modpacks directly from CurseForge and Modrinth with a single click, or upload custom .jar and zip files via SFTP or Web File Manager."
+    },
+    {
+      "id": 7,
+      "question": "How do automated daily backups work?",
+      "answer": "Your entire server (worlds, configs, player data, and plugins) is automatically backed up every 24 hours to offsite secure cloud storage. You can also take manual snapshot backups anytime from Noble Panel and restore with one click if anything goes wrong."
+    },
+    {
+      "id": 8,
+      "question": "Can I upgrade or downgrade my plan later without losing data?",
+      "answer": "Yes, you can upgrade your RAM, CPU vCores, or NVMe storage anytime from your Account Dashboard. Upgrades take effect instantly upon renewal with zero file loss, IP change, or world resetting."
+    },
+    {
+      "id": 9,
+      "question": "Do I get a free custom server address/subdomain?",
+      "answer": "Yes! Every server comes with a free custom subdomain such as yourserver.noblenode.host. If you own your own domain (e.g. play.yourserver.pk), you can link it directly using our simple DNS guide."
+    },
+    {
+      "id": 10,
+      "question": "What kind of customer support is available?",
+      "answer": "We provide 24/7 technical support in both English and Urdu through our official Discord community and priority ticketing system. Our team of experienced server administrators is always on standby to assist with plugin errors, crashes, and performance optimization."
+    }
+  ],
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Bilal Ahmed",
+      "role": "Owner, Karachi SMP (120+ Players)",
+      "text": "Switching to Noble Node\u2019s Karachi node dropped our player ping from 95ms down to 11ms on Nayatel and StormFiber. The Ryzen 9 9950X keeps our 20 TPS rock-solid even during 50-player dragon fights. Paying directly via EasyPaisa made monthly renewals super easy.",
+      "stars": 5,
+      "avatar": "BA",
+      "server": "play.karachismp.pk",
+      "plan": "32GB Community Plan"
+    },
+    {
+      "id": 2,
+      "name": "Hamza Tariq",
+      "role": "Lead Dev, PakCraft Network",
+      "text": "We run a BungeeCord network with 5 connected sub-servers. We faced constant UDP DDoS attacks on our old overseas host, but Noble Node\u2019s Path.net filter absorbed a 40 Gbps attack without a single player disconnecting. The best host for Pakistani server owners.",
+      "stars": 5,
+      "avatar": "HT",
+      "server": "mc.pakcraft.net",
+      "plan": "64GB Enterprise Plan"
+    },
+    {
+      "id": 3,
+      "name": "Saad Malik",
+      "role": "Founder, DesiCraft Survival",
+      "text": "Best Minecraft hosting in Pakistan hands down. The support on Discord is 24/7 and actually speaks Urdu and English. Server setup took less than 30 seconds after JazzCash checkout. The Gen4 NVMe disk speed makes chunk loading instantaneous.",
+      "stars": 5,
+      "avatar": "SM",
+      "server": "desicraft.noblenode.host",
+      "plan": "16GB Modded Plan"
+    },
+    {
+      "id": 4,
+      "name": "Daniyal Khan",
+      "role": "Admin, Bedrock Pakistan Community",
+      "text": "Geyser cross-play runs smoothly with zero jitter. Our mobile and console players get 14ms ping from Lahore and Islamabad. Installing plugins and modifying server.properties in Noble Panel is super intuitive.",
+      "stars": 5,
+      "avatar": "DK",
+      "server": "bedrock.pkcraft.org",
+      "plan": "32GB Community Plan"
+    },
+    {
+      "id": 5,
+      "name": "Usman Raza",
+      "role": "Host, Lifesteal PK",
+      "text": "Noble Panel is clean and blazing fast. Having automated daily cloud backups saved our SMP after an accidental world corruption. The CPU allocation is genuine Ryzen 9 power. 10/10 service!",
+      "stars": 5,
+      "avatar": "UR",
+      "server": "lifesteal.noblenode.host",
+      "plan": "16GB Modded Plan"
+    },
+    {
+      "id": 6,
+      "name": "Ayesha Siddiqui",
+      "role": "Modpack Creator, Cobblemon Desi",
+      "text": "Running a heavy 200+ mod Cobblemon pack used to lag terribly on our previous host. Noble Node\u2019s 16GB tier handles heavy chunk generation without breaking a sweat. Affordable PKR pricing is a huge plus.",
+      "stars": 5,
+      "avatar": "AS",
+      "server": "cobblemon.noblenode.host",
+      "plan": "16GB Modded Plan"
+    }
+  ],
+  "partners": [
+    {
+      "id": "amd",
+      "name": "AMD Enterprise",
+      "category": "Hardware Partner",
+      "description": "Deploying cutting-edge AMD Ryzen 9 9950X & 7950X3D processors clocking up to 5.7 GHz single-core speeds.",
+      "icon": "cpu"
+    },
+    {
+      "id": "path-net",
+      "name": "Path.net & Corero",
+      "category": "DDoS Mitigation Partner",
+      "description": "12+ Tbps globally distributed inline DDoS mitigation shielding all game traffic with sub-1ms reaction time.",
+      "icon": "shield-check"
+    },
+    {
+      "id": "samsung",
+      "name": "Samsung NVMe Gen4",
+      "category": "Storage Partner",
+      "description": "Ultra-fast enterprise PCIe 4.0 NVMe drives delivering 7,000+ MB/s read/write speeds for instant chunk loading.",
+      "icon": "hard-drive"
+    },
+    {
+      "id": "pterodactyl",
+      "name": "Pterodactyl Panel",
+      "category": "Platform Partner",
+      "description": "Customized high-performance Noble Panel web control panel with Web Console, SFTP, and 1-click mod installers.",
+      "icon": "layout"
+    },
+    {
+      "id": "papermc",
+      "name": "PaperMC & Purpur",
+      "category": "Software Partner",
+      "description": "Optimized high-performance Minecraft server software builds pre-configured for maximum tick-rate and TPS.",
+      "icon": "code"
+    },
+    {
+      "id": "easypaisa-jazzcash",
+      "name": "EasyPaisa & JazzCash",
+      "category": "Payment Partners",
+      "description": "Seamless local Pakistani payments allowing instant checkout with Zero transaction fees in PKR.",
+      "icon": "credit-card"
+    }
+  ],
+  "trusted_servers": [
+    {
+      "id": "karachi-smp",
+      "name": "Karachi City SMP",
+      "ip": "play.karachismp.pk",
+      "gamemode": "Survival SMP / Economy / GriefPrevention",
+      "version": "Paper 1.21.4",
+      "players": "140+ Peak Online",
+      "location": "Karachi, PK (9ms)",
+      "plan": "32GB Community Plan",
+      "status": "Online",
+      "verified": true,
+      "quote": "Over 100 players online nightly with flawless 20 TPS. Zero lag during community builds."
+    },
+    {
+      "id": "pakcraft-network",
+      "name": "PakCraft Network",
+      "ip": "mc.pakcraft.net",
+      "gamemode": "BungeeCord / Bedwars / Lifesteal / Skyblock",
+      "version": "Velocity + Purpur 1.21",
+      "players": "220+ Peak Online",
+      "location": "Karachi & Lahore Nodes",
+      "plan": "64GB Enterprise Plan",
+      "status": "Online",
+      "verified": true,
+      "quote": "Multiple sub-servers connected seamlessly with 10 Gbps uplinks across Pakistan."
+    },
+    {
+      "id": "desicraft-survival",
+      "name": "DesiCraft Survival",
+      "ip": "desicraft.noblenode.host",
+      "gamemode": "Vanilla+ / Custom Quests / Land Claims",
+      "version": "Paper 1.21.2",
+      "players": "65+ Peak Online",
+      "location": "Lahore, PK (11ms)",
+      "plan": "16GB Modded Plan",
+      "status": "Online",
+      "verified": true,
+      "quote": "The best uptime we\u2019ve had in 3 years of server hosting. EasyPaisa payments make life easy."
+    },
+    {
+      "id": "bedrock-pakistan",
+      "name": "Bedrock Pakistan Cross-Play",
+      "ip": "bedrock.pkcraft.org:19132",
+      "gamemode": "GeyserMC Crossplay / Mobile / Console / PC",
+      "version": "GeyserMC + Paper 1.21",
+      "players": "85+ Peak Online",
+      "location": "Lahore, PK (12ms)",
+      "plan": "32GB Community Plan",
+      "status": "Online",
+      "verified": true,
+      "quote": "Mobile and PS5 players get under 15ms ping from Islamabad and Lahore."
+    },
+    {
+      "id": "lifesteal-pk",
+      "name": "Lifesteal Pakistan",
+      "ip": "lifesteal.noblenode.host",
+      "gamemode": "Hardcore Lifesteal / Custom Enchants / PvP",
+      "version": "Purpur 1.21.4",
+      "players": "75+ Peak Online",
+      "location": "Karachi, PK (8ms)",
+      "plan": "16GB Modded Plan",
+      "status": "Online",
+      "verified": true,
+      "quote": "Intense PvP encounters with zero combat lag and instant hit detection."
+    },
+    {
+      "id": "cobblemon-desi",
+      "name": "Cobblemon Desi",
+      "ip": "cobblemon.noblenode.host",
+      "gamemode": "Fabric 1.20.1 / Cobblemon + 180 Mods",
+      "version": "Fabric 1.20.1",
+      "players": "45+ Peak Online",
+      "location": "Karachi, PK (10ms)",
+      "plan": "16GB Modded Plan",
+      "status": "Online",
+      "verified": true,
+      "quote": "Handles complex Pokemon AI and generation smoothly without chunk stutter."
+    }
+  ],
+  "servers": [
+    {
+      "id": "srv-101",
+      "user_id": 1791638713258,
+      "name": "Lahore SMP World",
+      "plan_id": "world-16gb",
+      "plan_name": "16GB RAM Plan",
+      "ram": "16GB DDR5",
+      "cpu": "6 vCores - Ryzen 9 9950X",
+      "storage": "240GB NVMe",
+      "ip": "pk-lahore-01.noblenode.host:25565",
+      "subdomain": "lahoresmp.noblenode.host",
+      "location": "Lahore, Pakistan",
+      "software": "Paper 1.21.4",
+      "status": "Running",
+      "uptime": "14 days 6 hours",
+      "players": "18 / 60",
+      "tps": 20.0,
+      "memory_used_mb": 6144,
+      "memory_total_mb": 16384,
+      "cpu_usage_pct": 14.5,
+      "disk_used_gb": 28.4,
+      "disk_total_gb": 240,
+      "auto_renew": true,
+      "monthly_pkr": 4400,
+      "renewal_date": "2026-11-10"
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD-PK-88412",
+      "user_id": 1791638713258,
+      "plan_id": "world-16gb",
+      "plan_name": "16GB RAM Modded Plan",
+      "total_pkr": 4400,
+      "payment_method": "EasyPaisa",
+      "status": "Paid",
+      "created_at": "2026-10-01 14:22:10",
+      "server_id": "srv-101",
+      "invoice_url": "#"
+    }
+  ],
+  "users": [
+    {
+      "id": 1791638713258,
+      "name": "Syeda Kubra",
+      "email": "pottypaste@gmail.com",
+      "password_hash": "scrypt:32768:8:1$rVUq8Jdf0HP5KNTm$e576af6316dd1e1337285c8299dea623a9a78ce77d32b0bec911b43596cb80a62afeeeb75e79af7c862fdec5fdbe3233791d427b32233b0d49034eb44ab77e24"
+    },
+    {
+      "id": 1791642155772,
+      "name": "hashim",
+      "email": "hashim@gmail.com",
+      "password_hash": "scrypt:32768:8:1$aBrorqMvGPApGTJk$aeb727d10e5d2f4f3e80587a287eb8ba77e4a43000018e0999ab55af68caf260618ab5c0264062922346ef1a221f7c5d7bbcf901442dc490b67d773aedf78ebf"
+    }
+  ]
+}

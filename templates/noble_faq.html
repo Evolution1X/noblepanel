@@ -1,0 +1,29 @@
+{% extends "noble_info_base.html" %}
+{% set page_title = "Questions, answered" %}
+{% set page_description = "Clear answers about Noble Node plan resources, account access, setup, and current service availability." %}
+{% set page_eyebrow = "THE QUICK READ" %}
+{% set page_slug = "faq" %}
+{% block info_content %}
+  <div class="nn-faq-layout">
+    <aside class="nn-faq-aside"><span class="nn-faq-aside-mark">?</span><h2>Need a quick answer?</h2><p>Browse common questions, or compare the resource details on each plan.</p><a class="nn-button nn-button-dark" href="/plans">Compare plans <span aria-hidden="true">↗</span></a></aside>
+    <div class="nn-faq-list">
+      {% for faq in faqs %}
+      <details class="nn-faq-item" {% if loop.first %}open{% endif %}>
+        <summary><span>{{ "%02d"|format(loop.index) }}</span><strong>{{ faq.question }}</strong><i aria-hidden="true">+</i></summary>
+        <div class="nn-faq-answer">{{ faq.answer }}</div>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {% for faq in faqs %}
+      {"@type":"Question","name":{{ faq.question|tojson }},"acceptedAnswer":{"@type":"Answer","text":{{ faq.answer|tojson }}}}{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+  </script>
+{% endblock %}

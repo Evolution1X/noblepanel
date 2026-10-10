@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ error_code }} · {{ error_title }} | Noble Node</title>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#10241e">
+  <link rel="icon" type="image/png" href="/static/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/noble.css?v=1">
+</head>
+<body class="noble-site nn-error-page">
+  <header class="nn-error-nav"><a class="nn-brand" href="/" aria-label="Noble Node home"><img src="/static/images/logo.png" alt=""><span>NOBLE NODE</span></a><a href="https://discord.noblenode.host">Discord <span aria-hidden="true">↗</span></a></header>
+  <main class="nn-error-main">
+    <p class="nn-eyebrow nn-eyebrow-dark"><span class="nn-error-code">{{ error_code }}</span> / {{ error_title|upper }}</p>
+    <h1>{{ error_message }}</h1>
+    <p>This route isn’t available. Head back to the plan list or browse the Noble Node help pages.</p>
+    <div class="nn-error-actions"><a class="nn-button nn-button-dark" href="/">Back home <span aria-hidden="true">↗</span></a><a class="nn-error-link" href="/plans">Compare plans <span aria-hidden="true">↗</span></a></div>
+    <span class="nn-error-mark" aria-hidden="true">{{ error_code }}</span>
+  </main>
+  <footer class="nn-footer"><a class="nn-brand" href="/" aria-label="Noble Node home"><img src="/static/images/logo.png" alt=""><span>NOBLE NODE</span></a><span>Minecraft server plans · <a href="https://noblenode.host/">noblenode.host</a></span><nav aria-label="Footer navigation"><a href="/faq">FAQ</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a></nav><span>© 2026 Noble Node</span></footer>
+</body>
+</html>

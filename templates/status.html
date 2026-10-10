@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Status | Noble Node Hosting Nodes</title>
+  <meta name="description" content="Service status and monitoring availability for Noble Node.">
+  
+  <link rel="icon" type="image/png" href="/static/images/logo.png">
+  <link rel="canonical" href="https://noblenode.host/status">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <link rel="stylesheet" href="/static/css/style.css?v=5000">
+</head>
+<body>
+
+  
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo">
+        <img src="/static/images/logo.png" alt="Noble Node" class="brand-logo-img">
+      </a>
+
+      <div class="nav-right-group">
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/plans">Plans</a></li>
+          <li><a href="/status" class="active">Status</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li class="nav-dropdown">
+            <a href="#" class="dropdown-trigger" onclick="event.preventDefault()">
+              Services <i data-lucide="chevron-down" class="dropdown-icon"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="/plans" class="dropdown-item"><i data-lucide="server"></i> Minecraft Java</a>
+              <a href="/plans" class="dropdown-item"><i data-lucide="smartphone"></i> Minecraft Bedrock</a>
+              <a href="/plans" class="dropdown-item"><i data-lucide="cpu"></i> Modded Forge / Fabric</a>
+              
+            </div>
+          </li>
+        </ul>
+
+        <div class="toggle-switch" id="theme-toggle-switch">
+          <label class="switch-label">
+            <input type="checkbox" class="checkbox" id="theme-checkbox" onchange="toggleTheme()">
+            <span class="slider">
+              <svg class="slider-icon sun-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              <svg class="slider-icon moon-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </span>
+          </label>
+        </div>
+
+        <a href="/signin" class="btn btn-pill-white btn-sm">Sign In</a>
+      </div>
+    </div>
+  </nav>
+
+  
+  <main class="container" style="padding-top: 140px; padding-bottom: 80px;">
+    
+    
+    <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); padding: 1.75rem 2rem; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <div class="pulse-dot-large"></div>
+        <div>
+          <h1 style="font-size: 1.5rem; color: #FFFFFF; font-family: var(--font-heading);">Monitoring is not connected</h1>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">No verified uptime data is available.</p>
+        </div>
+      </div>
+      <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim);">
+        Live monitoring not connected
+      </div>
+    </div>
+
+    
+    <h2 style="font-size: 1.35rem; margin-bottom: 1.5rem; color: #FFFFFF;">Datacenter Node Clusters</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 3.5rem;">
+      
+      
+      <div class="mk-card" style="padding: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+          <div>
+            <div style="font-weight: 700; font-size: 1.1rem; color: #FFFFFF;">Lahore Tier-3 Cluster</div>
+            <div style="font-size: 0.82rem; color: var(--text-muted);">pk-lhr-01.noblenode.host</div>
+          </div>
+          <span>Not monitored</span>
+        </div>
+        <div style="font-size: 0.85rem; color: var(--text-dim); display: flex; justify-content: space-between; border-top: 1px solid var(--border-muted); padding-top: 0.75rem;">
+          <span>Latency: <strong>Not measured</strong></span>
+          <span>DDoS: <strong>Not verified</strong></span>
+        </div>
+      </div>
+
+      
+      <div class="mk-card" style="padding: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+          <div>
+            <div style="font-weight: 700; font-size: 1.1rem; color: #FFFFFF;">Karachi IX Cluster</div>
+            <div style="font-size: 0.82rem; color: var(--text-muted);">pk-khi-01.noblenode.host</div>
+          </div>
+          <span>Not monitored</span>
+        </div>
+        <div style="font-size: 0.85rem; color: var(--text-dim); display: flex; justify-content: space-between; border-top: 1px solid var(--border-muted); padding-top: 0.75rem;">
+          <span>Latency: <strong>Not measured</strong></span>
+          <span>DDoS: <strong>Not verified</strong></span>
+        </div>
+      </div>
+
+      
+      <div class="mk-card" style="padding: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+          <div>
+            <div style="font-weight: 700; font-size: 1.1rem; color: #FFFFFF;">Dubai Equinix Node</div>
+            <div style="font-size: 0.82rem; color: var(--text-muted);">ae-dxb-01.noblenode.host</div>
+          </div>
+          <span>Not monitored</span>
+        </div>
+        <div style="font-size: 0.85rem; color: var(--text-dim); display: flex; justify-content: space-between; border-top: 1px solid var(--border-muted); padding-top: 0.75rem;">
+          <span>Latency: <strong>Not measured</strong></span>
+          <span>DDoS: <strong>Not verified</strong></span>
+        </div>
+      </div>
+
+      
+      <div class="mk-card" style="padding: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+          <div>
+            <div style="font-weight: 700; font-size: 1.1rem; color: #FFFFFF;">Frankfurt EU Central</div>
+            <div style="font-size: 0.82rem; color: var(--text-muted);">eu-fra-01.noblenode.host</div>
+          </div>
+          <span>Not monitored</span>
+        </div>
+        <div style="font-size: 0.85rem; color: var(--text-dim); display: flex; justify-content: space-between; border-top: 1px solid var(--border-muted); padding-top: 0.75rem;">
+          <span>Latency: <strong>Not measured</strong></span>
+          <span>DDoS: <strong>Not verified</strong></span>
+        </div>
+      </div>
+
+    </div>
+
+    
+    <h2 style="font-size: 1.35rem; margin-bottom: 1.5rem; color: #FFFFFF;">Core Platform Services</h2>
+    <div style="background: var(--bg-card); border: 1px solid var(--border-muted); border-radius: 16px; overflow: hidden;">
+      <div style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-muted); display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <strong style="color: #FFFFFF;">Pterodactyl Game Control Panel</strong>
+          <div style="font-size: 0.82rem; color: var(--text-muted);">Not connected</div>
+        </div>
+        <span class="status-tag-operational"><span class="tag-dot"></span> Not monitored</span>
+      </div>
+      <div style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-muted); display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <strong style="color: #FFFFFF;">Server provisioning</strong>
+          <div style="font-size: 0.82rem; color: var(--text-muted);">api.noblenode.host/v2</div>
+        </div>
+        <span class="status-tag-operational"><span class="tag-dot"></span> Not monitored</span>
+      </div>
+      <div style="padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <strong style="color: #FFFFFF;">Payment processing</strong>
+          <div style="font-size: 0.82rem; color: var(--text-muted);">pay.noblenode.host</div>
+        </div>
+        <span class="status-tag-operational"><span class="tag-dot"></span> Not monitored</span>
+      </div>
+    </div>
+
+  </main>
+
+  
+  <footer>
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none;">
+        <div>© 2026 Noble Node (Private) Limited. Crafted in Pakistan</div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <i data-lucide="shield-check"></i>
+          <span>Plan details should be confirmed before purchase.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/js/main.js?v=4000"></script>
+</body>
+</html>

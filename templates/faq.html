@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frequently Asked Questions & Support | Noble Node</title>
+  <meta name="description" content="Answers about Noble Node plan resources, account access, and current service availability.">
+  <meta name="robots" content="index,follow">
+  <meta name="keywords" content="Minecraft server plans, Noble Node support, hosting account help">
+  <link rel="canonical" href="https://noblenode.host/faq">
+
+  
+  <meta property="og:title" content="Frequently Asked Questions & Support | Noble Node">
+  <meta property="og:description" content="Answers about Noble Node plan resources, account access, and current service availability.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://noblenode.host/faq">
+  <meta property="og:image" content="https://noblenode.host/static/images/logo.png">
+
+  <link rel="icon" type="image/png" href="/static/images/logo.png">
+  
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  
+  <link rel="stylesheet" href="/static/css/style.css?v=5000">
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "How fast is my Minecraft server deployed after payment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Online checkout and server provisioning are not connected yet. Contact Noble Node support to confirm current availability before purchasing."
+      }
+    }, {
+      "@type": "Question",
+      "name": "Can Minecraft Bedrock (Mobile, Xbox, PS5) players join my server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bedrock cross-play depends on the server software and configuration. Contact Noble Node support to confirm whether your intended setup is supported."
+      }
+    }]
+  }
+  </script>
+</head>
+<body>
+
+
+  
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo" id="brand-logo">
+        <img src="/static/images/logo.png" alt="Noble Node" class="brand-logo-img">
+      </a>
+
+      <div class="nav-right-group">
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/plans">Plans</a></li>
+          <li><a href="/status">Status</a></li>
+          <li><a href="/faq" class="active">FAQ</a></li>
+          
+          <li class="nav-dropdown">
+            <a href="#" class="dropdown-trigger" onclick="event.preventDefault()">
+              Services <i data-lucide="chevron-down" class="dropdown-icon"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="/plans" class="dropdown-item"><i data-lucide="server"></i> Java Edition</a>
+              <a href="/plans" class="dropdown-item"><i data-lucide="smartphone"></i> Bedrock Edition</a>
+              <a href="/plans" class="dropdown-item"><i data-lucide="cpu"></i> Modded Forge / Fabric</a>
+              
+            </div>
+          </li>
+
+          <li class="nav-dropdown">
+            <a href="#" class="dropdown-trigger" onclick="event.preventDefault()">
+              Infrastructure <i data-lucide="chevron-down" class="dropdown-icon"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="/status" class="dropdown-item"><i data-lucide="activity"></i> System Status Page</a>
+              <a href="/plans#nodes" class="dropdown-item"><i data-lucide="map-pin"></i> Datacenter Nodes</a>
+            </div>
+          </li>
+        </ul>
+
+        <div class="toggle-switch" id="theme-toggle-switch">
+          <label class="switch-label">
+            <input type="checkbox" class="checkbox" id="theme-checkbox" onchange="toggleTheme()">
+            <span class="slider">
+              <svg class="slider-icon sun-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              <svg class="slider-icon moon-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </span>
+          </label>
+        </div>
+
+        <a href="/signin" class="btn btn-pill-white btn-sm">Sign In</a>
+
+        
+        <button class="hamburger-btn" id="hamburger-btn" onclick="openMobileMenu()">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  
+  <div class="mobile-menu-overlay" id="mobile-menu">
+    <button class="mobile-close" onclick="closeMobileMenu()">
+      <i data-lucide="x"></i>
+    </button>
+    <a href="/" onclick="closeMobileMenu()">Home</a>
+    <a href="/plans" onclick="closeMobileMenu()">Plans</a>
+    <a href="/status" onclick="closeMobileMenu()">System Status</a>
+    <a href="/faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="/signin" onclick="closeMobileMenu()">Sign In</a>
+    <a href="/signup" onclick="closeMobileMenu()">Sign Up</a>
+    
+    <div class="mobile-dropdown-group">
+      <span class="mobile-group-title">Legal & Policies</span>
+      <a href="/terms" onclick="closeMobileMenu()"><i data-lucide="file-text"></i> Terms of Service</a>
+      <a href="/privacy" onclick="closeMobileMenu()"><i data-lucide="shield-check"></i> Privacy Policy</a>
+    </div>
+
+    
+  </div>
+
+  
+  <section class="hero-section" style="padding-top: 9.5rem; padding-bottom: 4rem;">
+    <div class="container hero-center-container">
+      
+      <div class="tag-badge" style="margin-bottom: 1rem;"><span class="tag-num">[ 01 ]</span> <span class="tag-dot"></span> HELP CENTER</div>
+
+      <h1 class="hero-minekeep-title" style="font-size: 3.6rem; margin-bottom: 1rem;">
+        Frequently Asked <span class="gradient-pakistani">Questions</span>
+      </h1>
+
+      <p class="hero-minekeep-subtitle" style="margin-bottom: 2rem;">
+        Answers about plan resources, account access, and which service integrations are currently available.
+      </p>
+
+    </div>
+  </section>
+
+  
+  <section class="faq-section" style="border-top: none; padding-top: 1rem;">
+    <div class="container">
+      
+      <div style="max-width: 840px; margin: 0 auto;" id="faq-container">
+        
+      </div>
+
+    </div>
+  </section>
+
+  
+  <section class="minekeep-section">
+    <div class="container">
+      <div class="mk-card reveal" style="max-width: 840px; margin: 0 auto; text-align: center; padding: 3rem 2rem;">
+        <div class="mk-icon-box" style="margin: 0 auto 1.25rem auto;">
+          <i data-lucide="message-circle"></i>
+        </div>
+        <h2 style="font-size: 1.8rem; margin-bottom: 0.75rem; color: #FFFFFF;">Still have questions?</h2>
+        <p style="color: var(--text-muted); max-width: 540px; margin: 0 auto 1.75rem auto;">
+          Our customer support team is available to assist you with server setups, plugin errors, and payment verification.
+        </p>
+        <a href="/plans" class="btn btn-pill-white btn-lg rocket-hover">
+          <i data-lucide="rocket"></i> Deploy a Server Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="brand-logo">
+            <img src="/static/images/logo.png" alt="Noble Node" class="brand-logo-img">
+          </a>
+          <p>Minecraft server hosting plans with clearly listed resources and monthly pricing.</p>
+          <div class="footer-socials">
+            <a href="#" title="Discord"><i data-lucide="message-square"></i></a>
+            <a href="#" title="Twitter / X"><i data-lucide="twitter"></i></a>
+            <a href="#" title="YouTube"><i data-lucide="youtube"></i></a>
+            <a href="#" title="Email"><i data-lucide="mail"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Hosting Solutions</h4>
+          <ul>
+            <li><a href="/plans">Minecraft Java Edition</a></li>
+            <li><a href="/plans">Minecraft Bedrock Edition</a></li>
+            <li><a href="/plans">Forge & Fabric Modpacks</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Datacenters & Status</h4>
+          <ul>
+            <li><a href="/status">System Status Page</a></li>
+            <li><a href="/plans#nodes">Lahore Datacenter</a></li>
+            <li><a href="/plans#nodes">Karachi Datacenter</a></li>
+            <li><a href="/plans#nodes">Dubai Datacenter</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Support & Account</h4>
+          <ul>
+            <li><a href="/signin">Sign In</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+            <li><a href="/faq">FAQ Support</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Noble Node (Private) Limited. Crafted in Pakistan</div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <i data-lucide="shield-check"></i>
+          <span>Plan details should be confirmed before purchase.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  
+  <script src="/static/js/main.js?v=5000"></script>
+</body>
+</html>

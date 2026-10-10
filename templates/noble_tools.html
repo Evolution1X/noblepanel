@@ -1,0 +1,36 @@
+{% extends "noble_info_base.html" %}
+{% set page_title = "Server planning tools" %}
+{% set page_description = "Estimate Minecraft server memory, build a Java startup command, and compare listed Noble Node resource tiers." %}
+{% set page_eyebrow = "TOOLS FOR YOUR NEXT WORLD" %}
+{% set page_slug = "utilities" %}
+{% block info_content %}
+  <div class="nn-tool-grid">
+    <section class="nn-tool-card"><div class="nn-tool-index">TOOL / 01</div><h2>Memory planner</h2><p>Get a starting estimate from player count and server style. Actual needs vary by world, view distance, and plugins.</p><label for="utility-players">Expected players</label><input id="utility-players" type="number" min="1" max="200" value="20"><label for="utility-mode">Server style</label><select id="utility-mode"><option value="vanilla">Vanilla</option><option value="paper">Paper / plugins</option><option value="modded">Forge / Fabric modded</option></select><button class="nn-button nn-button-dark" type="button" onclick="estimateMemory()">Estimate RAM <span aria-hidden="true">↗</span></button><output id="memory-output" class="nn-tool-output">Recommended memory: 4 GB</output></section>
+    <section class="nn-tool-card"><div class="nn-tool-index">TOOL / 02</div><h2>Startup command</h2><p>Create a basic Java launch command. Confirm the Java version against your chosen Minecraft release.</p><label for="utility-memory">Maximum memory (GB)</label><input id="utility-memory" type="number" min="2" max="64" value="8"><label for="utility-version">Java version</label><select id="utility-version"><option value="17">Java 17</option><option value="21">Java 21</option></select><button class="nn-button nn-button-dark" type="button" onclick="buildStartCommand()">Build command <span aria-hidden="true">↗</span></button><output id="command-output" class="nn-tool-output">java -Xms4G -Xmx8G -jar paper.jar --nogui</output></section>
+    <section class="nn-tool-card nn-tool-guide"><div class="nn-tool-index">GUIDE / 03</div><h2>Match resources to your world</h2><p>These notes summarize the intended-use labels in the current plan data.</p><ul><li><strong>Small SMP</strong><span>Start by comparing Starter and Standard resources.</span></li><li><strong>Plugins</strong><span>Compare CPU and RAM in Paper-category plans.</span></li><li><strong>Modpacks</strong><span>Review Pro and Enterprise memory and storage.</span></li><li><strong>Network</strong><span>Use Enterprise plan details as a starting point.</span></li></ul><a class="nn-tool-link" href="/plans">Compare all plans <span aria-hidden="true">↗</span></a></section>
+  </div>
+  <p class="nn-tool-disclaimer">Estimates are planning aids, not performance guarantees. Plan specifications are shown for comparison; contact Noble Node to confirm service availability.</p>
+  <script>
+    function estimateMemory() {
+      const players = Math.max(1, Math.min(200, Number(document.getElementById('utility-players').value || 20)));
+      const mode = document.getElementById('utility-mode').value;
+      let memory = 4;
+      if (mode === 'vanilla') memory = Math.max(2, Math.ceil(players / 10) * 2);
+      if (mode === 'paper') memory = Math.max(4, Math.ceil(players / 6) * 2);
+      if (mode === 'modded') memory = Math.max(6, Math.ceil(players / 4) * 2 + 2);
+      document.getElementById('memory-output').textContent = `Starting estimate: ${memory} GB`;
+    }
+
+    function buildStartCommand() {
+      const memory = Math.max(2, Math.min(64, Number(document.getElementById('utility-memory').value || 8)));
+      const version = document.getElementById('utility-version').value;
+      const command = `java -Xms${Math.max(2, Math.round(memory * 0.5))}G -Xmx${memory}G -jar paper.jar --nogui`;
+      document.getElementById('command-output').textContent = `${command}  # Java ${version}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      estimateMemory();
+      buildStartCommand();
+    });
+  </script>
+{% endblock %}

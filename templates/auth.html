@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in or create an account | Noble Node</title>
+  <meta name="description" content="Sign in to Noble Node or create an account to manage your Minecraft hosting.">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#10241e">
+  <link rel="icon" type="image/png" href="/static/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/noble.css?v=1">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="noble-site nn-auth-page" data-auth-mode="{{ mode }}" data-selected-plan="{{ selected_plan.id if selected_plan else '' }}">
+  <header class="nn-auth-nav"><a class="nn-brand" href="/" aria-label="Noble Node home"><img src="/static/images/logo.png" alt="Noble Node" width="34" height="34" loading="lazy" decoding="async"><span>NOBLE NODE</span></a><a class="nn-auth-back" href="/"><span aria-hidden="true">←</span> Back to Noble Node</a></header>
+  <main class="nn-auth-main">
+    <section class="nn-auth-frame" aria-label="Noble Node account access">
+      <aside class="nn-auth-story" id="auth-story">
+        <div class="nn-auth-story-top"><span class="nn-auth-mark"><img src="/static/images/logo.png" alt="Noble Node" width="34" height="34" loading="lazy" decoding="async"></span><span>NOBLE NODE / PLAYER ACCESS</span></div>
+        <div class="nn-auth-story-copy"><p class="nn-eyebrow"><span class="nn-live-dot"></span> YOUR NEXT WORLD AWAITS</p><h1 id="auth-story-title">Welcome back.</h1><p id="auth-story-copy">Sign in to pick up where your server story left off.</p></div>
+        <div class="nn-auth-switch"><span id="auth-switch-label">New to Noble Node?</span><button type="button" class="nn-auth-switch-button" data-auth-mode-target="signup" id="auth-switch-button">Create account <span aria-hidden="true">↗</span></button></div>
+        <div class="nn-auth-coordinate" aria-hidden="true">51°30′26.4″N<br>WORLD SEED: YOURS</div>
+      </aside>
+      <div class="nn-auth-form-side">
+        <div class="nn-auth-form-heading"><p class="nn-eyebrow nn-eyebrow-dark" id="auth-form-eyebrow">PLAYER ACCOUNT</p><h2 id="auth-form-title">Create account</h2><p id="auth-form-subtitle">One account for your Noble Node hosting.</p></div>
+        {% if auth_error %}<div class="nn-auth-error" role="alert">{{ auth_error }}</div>{% endif %}
+        {% if selected_plan %}<p class="nn-selected-plan">SELECTED / {{ selected_plan.name }} / PKR {{ "{:,}".format(selected_plan.pkr_price) if selected_plan.pkr_price else "2,200" }} (~${{ "%.2f"|format(selected_plan.usd_price) }}) per month</p>{% endif %}
+        <div class="nn-sso-stack" id="auth-sso" {% if not sso_providers or mode == 'reset' %}hidden{% endif %}>
+          {% if 'google' in sso_providers %}<a class="nn-sso-button" href="{{ url_for('auth_start', provider='google', plan=selected_plan.id if selected_plan else none) }}"><span class="nn-google-mark" aria-hidden="true">G</span>Continue with Google</a>{% endif %}
+          {% if 'microsoft' in sso_providers %}<a class="nn-sso-button" href="{{ url_for('auth_start', provider='microsoft', plan=selected_plan.id if selected_plan else none) }}"><span class="nn-microsoft-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Continue with Microsoft</a>{% endif %}
+        </div>
+        {% if sso_providers %}<div class="nn-form-divider" id="auth-divider" {% if mode == 'reset' %}hidden{% endif %}><span>or use your email</span></div>{% endif %}
+        <form class="nn-auth-form" id="signup-form" data-auth-panel="signup" onsubmit="handleClientSignUp(event)" {% if mode != 'signup' %}hidden{% endif %}>
+          <label for="signup-name">Name</label><input id="signup-name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+          <label for="signup-email">Email</label><input id="signup-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+          <div class="nn-password-label"><label for="signup-password">Password</label><button type="button" class="nn-password-toggle" data-toggle-password="signup-password" aria-label="Show password">Show</button></div>
+          <input id="signup-password" name="password" type="password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters" required>
+          <button class="nn-button nn-button-submit" type="submit"><span>Create account</span><span aria-hidden="true">↗</span></button>
+          <button class="nn-forgot-link" type="button" data-auth-mode-target="reset">Recover an existing account</button>
+        </form>
+        <form class="nn-auth-form" id="signin-form" data-auth-panel="signin" onsubmit="handleClientSignIn(event)" {% if mode != 'signin' %}hidden{% endif %}>
+          <label for="signin-email">Email</label><input id="signin-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+          <div class="nn-password-label"><label for="signin-password">Password</label><button type="button" class="nn-password-toggle" data-toggle-password="signin-password" aria-label="Show password">Show</button></div>
+          <input id="signin-password" name="password" type="password" autocomplete="current-password" placeholder="Your password" required>
+          <button class="nn-button nn-button-submit" type="submit"><span>Sign in</span><span aria-hidden="true">↗</span></button>
+          <button class="nn-forgot-link" type="button" data-auth-mode-target="reset">Forgot password?</button>
+        </form>
+        <form class="nn-auth-form" id="password-reset-request-form" data-auth-panel="reset" onsubmit="handlePasswordResetRequest(event)" {% if mode != 'reset' %}hidden{% endif %}>
+          <label for="reset-email">Email</label><input id="reset-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+          <p class="nn-reset-hint">We’ll send a single-use reset link if that email has a password account.</p>
+          <button class="nn-button nn-button-submit" type="submit"><span>Send reset link</span><span aria-hidden="true">↗</span></button>
+          <p class="nn-reset-status" id="password-reset-request-status" role="status" aria-live="polite"></p>
+        </form>
+        <p class="nn-auth-terms">By continuing, you agree to the <a href="/terms">Terms</a> and <a href="/privacy">Privacy Policy</a>.</p>
+      </div>
+    </section>
+    <p class="nn-auth-footnote"><span class="nn-auth-lock" aria-hidden="true">◆</span> Account credentials are handled over your secure Noble Node session.</p>
+  </main>
+  <aside class="nn-cookie-banner" id="nn-cookie-banner" role="region" aria-label="Cookie notice" hidden><div><strong>Only essential cookies.</strong><p>Noble Node uses an essential session cookie for account security. We do not use advertising or analytics cookies.</p></div><a href="/privacy">Privacy</a><button type="button" id="nn-cookie-accept">Continue</button></aside>
+  <script src="/static/js/main.js?v=noble1"></script>
+</body>
+</html>
